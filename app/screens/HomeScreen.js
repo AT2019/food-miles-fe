@@ -18,6 +18,7 @@ export default class HomeScreen extends Component {
           <TouchableOpacity
             title="Login to FoodMiles"
             style={styles.loginButton}
+            onPress={() => navigate("Login")}
           >
             <Text style={styles.white}>Login to FoodMiles!</Text>
           </TouchableOpacity>
