@@ -21,6 +21,25 @@ export default class CameraScreen extends Component {
     title: "Scan your food!"
   };
 
+  async snapPhoto() {
+    if (this.camera) {
+      alert("Taking a photo!");
+      const options = {
+        quality: 1,
+        base64: true,
+        fixOrientation: true,
+        exif: true
+      };
+
+      await this.camera.takePictureAsync(options).then(photo => {
+        photo.exif.Orientation = 1;
+        console.log(photo);
+
+        // This is where we pass `photo` into the API
+      });
+    }
+  }
+
   render() {
     const { navigate } = this.props.navigation;
     const { hasCameraPermission, type } = this.state;
@@ -31,11 +50,18 @@ export default class CameraScreen extends Component {
     } else {
       return (
         <View style={{ flex: 1 }}>
-          <Hero message="Welcome to FoodMiles!" />
+          <Hero message="Take a photo!" />
 
           <View style={styles.cameraContainer}>
-            <Camera type={type} style={styles.camera}></Camera>
-            <TouchableOpacity style={styles.snapButton}>
+            <Camera
+              type={type}
+              ref={ref => (this.camera = ref)}
+              style={styles.camera}
+            ></Camera>
+            <TouchableOpacity
+              style={styles.snapButton}
+              onPress={() => this.snapPhoto()}
+            >
               <Text style={styles.white}>Snap Photo!</Text>
             </TouchableOpacity>
           </View>
