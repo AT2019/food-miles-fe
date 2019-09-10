@@ -11,7 +11,7 @@ export default class PreviousShopsScreen extends Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <Hero message="Your previous shops!" />
+        <Hero message="Your previous shops!" icon="shopping-basket" />
 
         <View style={styles.banner}>
           <Text style={styles.bannerInnerHeader}>

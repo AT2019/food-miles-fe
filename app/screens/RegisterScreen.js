@@ -13,7 +13,7 @@ export default class LoginScreen extends Component {
     const { navigate } = this.props.navigation;
     return (
       <View style={styles.mainContainer}>
-        <Hero message="Register for FoodMiles!" />
+        <Hero message="Register for FoodMiles!" icon="user" />
 
         <View style={styles.loginContainer}>
           <Input placeholder="Your username" />

@@ -12,7 +12,7 @@ export default class Dashboard extends Component {
     const { navigate } = this.props.navigation;
     return (
       <View>
-        <Hero message="Your Dashboard" />
+        <Hero message="Your Dashboard" icon="user" />
 
         <View style={styles.buttonList}>
           <TouchableOpacity

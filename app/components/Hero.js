@@ -4,11 +4,12 @@ import { StyleSheet, Text, View, Button, TouchableOpacity } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 
 export default function Hero(props) {
-  const getHeight = props.height || 110;
+  const getIconChoice = props.icon || "plane";
+
   return (
     <View style={styles.hero}>
       <Text style={styles.white}>{props.message}</Text>
-      <Icon name="plane" size={15} style={styles.whiteIcon} />
+      <Icon name={getIconChoice} size={15} style={styles.whiteIcon} />
     </View>
   );
 }
