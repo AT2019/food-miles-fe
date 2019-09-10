@@ -22,12 +22,20 @@ export default class HomeScreen extends Component {
           >
             <Text style={styles.white}>Login to FoodMiles!</Text>
           </TouchableOpacity>
+
           <TouchableOpacity
             title="Login to FoodMiles"
             style={styles.registerButton}
             onPress={() => navigate("Register")}
           >
             <Text style={styles.white}>Register for FoodMiles!</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            title="CAMERA SCREEN - TEMPORARY"
+            style={styles.registerButton}
+            onPress={() => navigate("Camera")}
+          >
+            <Text style={styles.white}>Camera Screen - Temp!</Text>
           </TouchableOpacity>
         </View>
       </View>

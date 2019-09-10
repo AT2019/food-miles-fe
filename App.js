@@ -6,6 +6,7 @@ import { createStackNavigator } from "react-navigation-stack";
 import HomeScreen from "./app/screens/HomeScreen";
 import LoginScreen from "./app/screens/LoginScreen";
 import RegisterScreen from "./app/screens/RegisterScreen";
+import CameraScreen from "./app/screens/CameraScreen";
 
 const MainNavigator = createStackNavigator({
   Home: {
@@ -16,6 +17,9 @@ const MainNavigator = createStackNavigator({
   },
   Register: {
     screen: RegisterScreen
+  },
+  Camera: {
+    screen: CameraScreen
   }
 });
 

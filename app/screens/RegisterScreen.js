@@ -4,7 +4,7 @@ import Hero from "../components/Hero.js";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { Input } from "react-native-elements";
 
-export default class LoginScreen extends Component {
+export default class RegisterScreen extends Component {
   static navigationOptions = {
     title: "Register for a FoodMiles account"
   };
