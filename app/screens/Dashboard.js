@@ -3,39 +3,40 @@ import { StyleSheet, Text, View, Button, TouchableOpacity } from "react-native";
 import Hero from "../components/Hero.js";
 import Icon from "react-native-vector-icons/FontAwesome";
 
-export default class HomeScreen extends Component {
+export default class Dashboard extends Component {
   static navigationOptions = {
-    title: "Homepage"
+    title: "Dashboard"
   };
 
   render() {
     const { navigate } = this.props.navigation;
     return (
       <View>
-        <Hero message="Welcome to FoodMiles!" />
+        <Hero message="Your Dashboard" />
 
         <View style={styles.buttonList}>
           <TouchableOpacity
-            title="Login to FoodMiles"
+            title="Take a photo"
             style={styles.loginButton}
-            onPress={() => navigate("Login")}
+            onPress={() => navigate("Camera")}
           >
-            <Text style={styles.white}>Login to FoodMiles!</Text>
+            <Text style={styles.white}>Start a Shop!</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
-            title="Login to FoodMiles"
+            title="Previous shops"
             style={styles.registerButton}
             onPress={() => navigate("Register")}
           >
-            <Text style={styles.white}>Register for FoodMiles!</Text>
+            <Text style={styles.white}>Your Previous Shops</Text>
           </TouchableOpacity>
+
           <TouchableOpacity
-            title="DASH  - temp"
+            title="More info"
             style={styles.registerButton}
-            onPress={() => navigate("Dashboard")}
+            onPress={() => navigate("Register")}
           >
-            <Text style={styles.white}>Dashboard - Temp!</Text>
+            <Text style={styles.white}>More Food Miles Information</Text>
           </TouchableOpacity>
         </View>
       </View>
