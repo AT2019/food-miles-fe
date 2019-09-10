@@ -64,6 +64,12 @@ export default class CameraScreen extends Component {
             >
               <Text style={styles.white}>Snap Photo!</Text>
             </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.infoButton}
+              onPress={() => navigate("MoreInfo")}
+            >
+              <Text style={styles.white}>More Information</Text>
+            </TouchableOpacity>
           </View>
         </View>
       );
@@ -83,6 +89,16 @@ const styles = StyleSheet.create({
   },
   snapButton: {
     backgroundColor: "#388E3C",
+    padding: 10,
+    alignItems: "center",
+    borderRadius: 4,
+    marginBottom: 10,
+    width: 250,
+    marginTop: 10,
+    alignItems: "center"
+  },
+  infoButton: {
+    backgroundColor: "#4CAF50",
     padding: 10,
     alignItems: "center",
     borderRadius: 4,

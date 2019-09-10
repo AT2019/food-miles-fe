@@ -7,6 +7,7 @@ import HomeScreen from "./app/screens/HomeScreen";
 import LoginScreen from "./app/screens/LoginScreen";
 import RegisterScreen from "./app/screens/RegisterScreen";
 import CameraScreen from "./app/screens/CameraScreen";
+import MoreInfoScreen from "./app/screens/MoreInfoScreen";
 import Dashboard from "./app/screens/Dashboard";
 
 const MainNavigator = createStackNavigator({
@@ -24,6 +25,9 @@ const MainNavigator = createStackNavigator({
   },
   Dashboard: {
     screen: Dashboard
+  },
+  MoreInfo: {
+    screen: MoreInfoScreen
   }
 });
 
