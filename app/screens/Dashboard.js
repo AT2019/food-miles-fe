@@ -26,7 +26,7 @@ export default class Dashboard extends Component {
           <TouchableOpacity
             title="Previous shops"
             style={styles.registerButton}
-            onPress={() => navigate("Register")}
+            onPress={() => navigate("PreviousShops")}
           >
             <Text style={styles.white}>Your Previous Shops</Text>
           </TouchableOpacity>

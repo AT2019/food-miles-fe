@@ -1,24 +1,23 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, View, Button, TouchableOpacity } from "react-native";
 import Hero from "../components/Hero.js";
+import { Input } from "react-native-elements";
 
-export default class CameraScreen extends Component {
+export default class PreviousShopsScreen extends Component {
   static navigationOptions = {
-    title: "More information!"
+    title: "Your Previous Shops"
   };
 
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <Hero message="Where did your food come from?" />
+        <Hero message="Your previous shops!" />
 
         <View style={styles.banner}>
-          <Text style={styles.white}>
-            Your food in total has travelled: 923,842 miles!
+          <Text style={styles.bannerInnerHeader}>
+            30th September 2019 @ Sainsburys
           </Text>
-        </View>
-        <View style={styles.banner}>
-          <Text style={styles.white}>Your last shop was 39 miles!</Text>
+          <Text style={styles.bannerInner}>Mile total: 740 miles</Text>
         </View>
       </View>
     );
@@ -32,6 +31,17 @@ const styles = StyleSheet.create({
     paddingTop: 5,
     paddingBottom: 5,
     borderRadius: 4
+  },
+  bannerInner: {
+    paddingLeft: 10,
+    color: "#FFFFFF"
+  },
+  bannerInnerHeader: {
+    paddingLeft: 10,
+    color: "#FFFFFF",
+    fontSize: 15,
+    textAlign: "center",
+    paddingBottom: 6
   },
   cameraContainer: {
     flex: 1,

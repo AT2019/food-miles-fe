@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, Button, TouchableOpacity } from "react-native";
 import Hero from "../components/Hero.js";
 import * as Permissions from "expo-permissions";
 import { Camera } from "expo-camera";
-
+import { Input } from "react-native-elements";
 export default class CameraScreen extends Component {
   state = {
     hasCameraPermission: null,
@@ -50,8 +50,6 @@ export default class CameraScreen extends Component {
     } else {
       return (
         <View style={{ flex: 1 }}>
-          <Hero message="Take a photo!" />
-
           <View style={styles.cameraContainer}>
             <Camera
               type={type}
@@ -69,6 +67,12 @@ export default class CameraScreen extends Component {
               onPress={() => navigate("MoreInfo")}
             >
               <Text style={styles.white}>More Information</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.infoButton}
+              onPress={() => navigate("MoreInfo")}
+            >
+              <Text style={styles.white}>Not working?</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -92,7 +96,7 @@ const styles = StyleSheet.create({
     padding: 10,
     alignItems: "center",
     borderRadius: 4,
-    marginBottom: 10,
+    marginBottom: 3,
     width: 250,
     marginTop: 10,
     alignItems: "center"
@@ -102,12 +106,19 @@ const styles = StyleSheet.create({
     padding: 10,
     alignItems: "center",
     borderRadius: 4,
-    marginBottom: 10,
+    marginBottom: 3,
     width: 250,
     marginTop: 10,
     alignItems: "center"
   },
   white: {
     color: "#FFFFFF"
+  },
+  banner: {
+    margin: 10,
+    backgroundColor: "#4CAF50",
+    paddingTop: 5,
+    paddingBottom: 5,
+    borderRadius: 4
   }
 });
