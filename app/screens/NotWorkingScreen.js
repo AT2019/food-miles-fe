@@ -20,11 +20,23 @@ export default class Dashboard extends Component {
           <Input placeholder="What country is the food from?" />
           <Input placeholder="What is the food type? (dairy, etc)" />
 
-          <TouchableOpacity style={styles.loginButton}>
-            <Text style={font.white}>Login</Text>
+          <TouchableOpacity style={notWorkingStyle.button}>
+            <Text style={[font.white, font.center]}>Login</Text>
           </TouchableOpacity>
         </View>
       </View>
     );
   }
 }
+const notWorkingStyle = StyleSheet.create({
+  button: {
+    backgroundColor: "#388E3C",
+    padding: 10,
+    borderRadius: 4,
+    marginBottom: 10,
+    alignSelf: "stretch",
+    marginLeft: 10,
+    marginRight: 10,
+    marginTop: 10
+  }
+});
