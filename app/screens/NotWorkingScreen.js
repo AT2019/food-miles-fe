@@ -12,7 +12,6 @@ export default class Dashboard extends Component {
   };
 
   render() {
-    const { navigate } = this.props.navigation;
     return (
       <View style={styles.mainContainer}>
         <Hero message="Fill in Information" icon="user" />
