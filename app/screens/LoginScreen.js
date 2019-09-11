@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, View, Button, TouchableOpacity } from "react-native";
 import Hero from "../components/Hero.js";
-import Icon from "react-native-vector-icons/FontAwesome";
 import { Input } from "react-native-elements";
 
 export default class LoginScreen extends Component {
@@ -18,7 +17,6 @@ export default class LoginScreen extends Component {
         <View style={styles.loginContainer}>
           <Input placeholder="Your username" />
           <Input placeholder="Your password" />
-
           <TouchableOpacity style={styles.loginButton}>
             <Text style={styles.white}>Login</Text>
           </TouchableOpacity>

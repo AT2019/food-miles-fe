@@ -70,7 +70,7 @@ export default class CameraScreen extends Component {
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.infoButton}
-              onPress={() => navigate("MoreInfo")}
+              onPress={() => navigate("NotWorking")}
             >
               <Text style={styles.white}>Not working?</Text>
             </TouchableOpacity>
