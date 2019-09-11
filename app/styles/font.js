@@ -6,6 +6,9 @@ const font = StyleSheet.create({
   },
   dark: {
     color: "#212121"
+  },
+  center: {
+    textAlign: "center"
   }
 });
 

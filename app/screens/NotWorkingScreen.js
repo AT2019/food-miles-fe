@@ -22,7 +22,7 @@ export default class Dashboard extends Component {
           <Input placeholder="What is the food type? (dairy, etc)" />
 
           <TouchableOpacity style={styles.loginButton}>
-            <Text style={styles.white}>Login</Text>
+            <Text style={font.white}>Login</Text>
           </TouchableOpacity>
         </View>
       </View>

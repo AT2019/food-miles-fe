@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, Button, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import Hero from "../components/Hero.js";
-import { Input } from "react-native-elements";
+
+import styles from "../styles/main";
 
 export default class PreviousShopsScreen extends Component {
   static navigationOptions = {
@@ -14,24 +15,17 @@ export default class PreviousShopsScreen extends Component {
         <Hero message="Your previous shops!" icon="shopping-basket" />
 
         <View style={styles.banner}>
-          <Text style={styles.bannerInnerHeader}>
+          <Text style={prevShopStyles.bannerInnerHeader}>
             30th September 2019 @ Sainsburys
           </Text>
-          <Text style={styles.bannerInner}>Mile total: 740 miles</Text>
+          <Text style={prevShopStyles.bannerInner}>Mile total: 740 miles</Text>
         </View>
       </View>
     );
   }
 }
 
-const styles = StyleSheet.create({
-  banner: {
-    margin: 10,
-    backgroundColor: "#4CAF50",
-    paddingTop: 5,
-    paddingBottom: 5,
-    borderRadius: 4
-  },
+const prevShopStyles = StyleSheet.create({
   bannerInner: {
     paddingLeft: 10,
     color: "#FFFFFF"

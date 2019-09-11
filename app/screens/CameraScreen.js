@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, View, Button, TouchableOpacity } from "react-native";
-import Hero from "../components/Hero.js";
 import * as Permissions from "expo-permissions";
 import { Camera } from "expo-camera";
-import { Input } from "react-native-elements";
+
+import font from "../styles/font";
+
 export default class CameraScreen extends Component {
   state = {
     hasCameraPermission: null,
@@ -50,29 +51,29 @@ export default class CameraScreen extends Component {
     } else {
       return (
         <View style={{ flex: 1 }}>
-          <View style={styles.cameraContainer}>
+          <View style={camStyles.cameraContainer}>
             <Camera
               type={type}
               ref={ref => (this.camera = ref)}
-              style={styles.camera}
+              style={camStyles.camera}
             ></Camera>
             <TouchableOpacity
-              style={styles.snapButton}
+              style={camStyles.snapButton}
               onPress={() => this.snapPhoto()}
             >
-              <Text style={styles.white}>Snap Photo!</Text>
+              <Text style={font.white}>Snap Photo!</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              style={styles.infoButton}
+              style={camStyles.infoButton}
               onPress={() => navigate("MoreInfo")}
             >
-              <Text style={styles.white}>More Information</Text>
+              <Text style={font.white}>More Information</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              style={styles.infoButton}
+              style={camStyles.infoButton}
               onPress={() => navigate("NotWorking")}
             >
-              <Text style={styles.white}>Not working?</Text>
+              <Text style={font.white}>Not working?</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -81,7 +82,7 @@ export default class CameraScreen extends Component {
   }
 }
 
-const styles = StyleSheet.create({
+const camStyles = StyleSheet.create({
   cameraContainer: {
     flex: 1,
     alignItems: "center",
@@ -110,15 +111,5 @@ const styles = StyleSheet.create({
     width: 250,
     marginTop: 10,
     alignItems: "center"
-  },
-  white: {
-    color: "#FFFFFF"
-  },
-  banner: {
-    margin: 10,
-    backgroundColor: "#4CAF50",
-    paddingTop: 5,
-    paddingBottom: 5,
-    borderRadius: 4
   }
 });
