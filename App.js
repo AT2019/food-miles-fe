@@ -9,6 +9,8 @@ import RegisterScreen from "./app/screens/RegisterScreen";
 import CameraScreen from "./app/screens/CameraScreen";
 import MoreInfoScreen from "./app/screens/MoreInfoScreen";
 import Dashboard from "./app/screens/Dashboard";
+import PreviousShopsScreen from "./app/screens/PreviousShopsScreen";
+import NotWorkingScreen from "./app/screens/NotWorkingScreen";
 
 const MainNavigator = createStackNavigator({
   Home: {
@@ -28,6 +30,12 @@ const MainNavigator = createStackNavigator({
   },
   MoreInfo: {
     screen: MoreInfoScreen
+  },
+  PreviousShops: {
+    screen: PreviousShopsScreen
+  },
+  NotWorking: {
+    screen: NotWorkingScreen
   }
 });
 

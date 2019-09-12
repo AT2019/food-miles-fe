@@ -1,8 +1,10 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, Button, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import Hero from "../components/Hero.js";
-import Icon from "react-native-vector-icons/FontAwesome";
 import { Input } from "react-native-elements";
+
+import styles from "../styles/main";
+import font from "../styles/font";
 
 export default class LoginScreen extends Component {
   static navigationOptions = {
@@ -10,17 +12,16 @@ export default class LoginScreen extends Component {
   };
 
   render() {
-    const { navigate } = this.props.navigation;
     return (
       <View style={styles.mainContainer}>
-        <Hero message="Register for FoodMiles!" />
+        <Hero message="Register for FoodMiles!" icon="user" />
 
-        <View style={styles.loginContainer}>
+        <View style={regStyles.loginContainer}>
           <Input placeholder="Your username" />
           <Input placeholder="Your password" />
 
-          <TouchableOpacity style={styles.registerButton}>
-            <Text style={styles.white}>Register</Text>
+          <TouchableOpacity style={regStyles.registerButton}>
+            <Text style={[font.white, font.center]}>Register</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -28,10 +29,7 @@ export default class LoginScreen extends Component {
   }
 }
 
-const styles = StyleSheet.create({
-  mainContainer: {
-    flex: 1
-  },
+const regStyles = StyleSheet.create({
   loginContainer: {
     flex: 1,
     justifyContent: "center",
@@ -46,9 +44,5 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     marginRight: 10,
     marginTop: 10
-  },
-  white: {
-    color: "#FFFFFF",
-    textAlign: "center"
   }
 });

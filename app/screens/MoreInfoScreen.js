@@ -1,7 +1,9 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, Button, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import Hero from "../components/Hero.js";
-import { Input } from "react-native-elements";
+
+import styles from "../styles/main";
+import font from "../styles/font";
 
 export default class CameraScreen extends Component {
   static navigationOptions = {
@@ -10,61 +12,26 @@ export default class CameraScreen extends Component {
 
   render() {
     return (
-      <View style={{ flex: 1 }}>
-        <Hero message="Where did your food come from?" />
+      <View style={styles.mainContainer}>
+        <Hero message="Add more information to your shop" icon="plus" />
 
-        <View style={styles.banner}>
-          <Input placeholder="Food Type" />
-        </View>
-        <View style={styles.banner}>
-          <Text style={styles.white}>
-            Your food has travelled: 923,842 miles!
-          </Text>
+        <View style={infoStyles.banner}>
+          <Text style={[font.white, font.center]}>The map will go here</Text>
         </View>
       </View>
     );
   }
 }
 
-const styles = StyleSheet.create({
+const infoStyles = StyleSheet.create({
   banner: {
-    margin: 10,
     backgroundColor: "#4CAF50",
+    marginTop: 10,
+    marginLeft: 10,
+    marginRight: 10,
     paddingTop: 5,
     paddingBottom: 5,
     borderRadius: 4
   },
-  cameraContainer: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  camera: {
-    width: 250,
-    height: 250
-  },
-  snapButton: {
-    backgroundColor: "#388E3C",
-    padding: 10,
-    alignItems: "center",
-    borderRadius: 4,
-    marginBottom: 10,
-    width: 250,
-    marginTop: 10,
-    alignItems: "center"
-  },
-  infoButton: {
-    backgroundColor: "#4CAF50",
-    padding: 10,
-    alignItems: "center",
-    borderRadius: 4,
-    marginBottom: 10,
-    width: 250,
-    marginTop: 10,
-    alignItems: "center"
-  },
-  white: {
-    color: "#FFFFFF",
-    textAlign: "center"
-  }
+  menu: {}
 });
