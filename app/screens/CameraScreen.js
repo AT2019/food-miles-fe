@@ -34,7 +34,8 @@ export default class CameraScreen extends Component {
 
       await this.camera.takePictureAsync(options).then(photo => {
         photo.exif.Orientation = 1;
-        console.log(photo);
+        // Photo uri is the location of the photo.
+        console.log(photo.base64);
 
         // This is where we pass `photo` into the API
       });

@@ -32,14 +32,6 @@ export default class Dashboard extends Component {
           >
             <Text style={font.white}>Your Previous Shops</Text>
           </TouchableOpacity>
-
-          <TouchableOpacity
-            title="More info"
-            style={styles.registerButton}
-            onPress={() => navigate("Register")}
-          >
-            <Text style={font.white}>More Food Miles Information</Text>
-          </TouchableOpacity>
         </View>
       </View>
     );
