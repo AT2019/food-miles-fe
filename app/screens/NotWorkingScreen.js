@@ -1,7 +1,15 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, Button, TouchableOpacity } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Button,
+  TouchableOpacity,
+  Picker
+} from "react-native";
 import Hero from "../components/Hero.js";
 import { Input } from "react-native-elements";
+import RNPickerSelect from "react-native-picker-select";
 
 import styles from "../styles/main";
 import font from "../styles/font";
@@ -18,10 +26,12 @@ export default class Dashboard extends Component {
 
         <View style={styles.container}>
           <Input placeholder="What country is the food from?" />
-          <Input placeholder="What is the food type? (dairy, etc)" />
+          <View style={notWorkingStyle.banner}>
+            <Text style={[font.white, font.center]}>Something here</Text>
+          </View>
 
           <TouchableOpacity style={notWorkingStyle.button}>
-            <Text style={[font.white, font.center]}>Login</Text>
+            <Text style={[font.white, font.center]}>Submit Information</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -38,5 +48,15 @@ const notWorkingStyle = StyleSheet.create({
     marginLeft: 10,
     marginRight: 10,
     marginTop: 10
+  },
+  banner: {
+    backgroundColor: "#4CAF50",
+    alignSelf: "stretch",
+    marginTop: 10,
+    marginLeft: 10,
+    marginRight: 10,
+    paddingTop: 5,
+    paddingBottom: 5,
+    borderRadius: 4
   }
 });

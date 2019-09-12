@@ -9,6 +9,9 @@ export default class PreviousShopsScreen extends Component {
     title: "Your Previous Shops"
   };
 
+  // We need to use a list view - I haven't done this only because you need to specify data
+  // in the ListView
+
   render() {
     return (
       <View style={{ flex: 1 }}>
@@ -16,9 +19,45 @@ export default class PreviousShopsScreen extends Component {
 
         <View style={styles.banner}>
           <Text style={prevShopStyles.bannerInnerHeader}>
-            30th September 2019 @ Sainsburys
+            30th September 2019
           </Text>
           <Text style={prevShopStyles.bannerInner}>Mile total: 740 miles</Text>
+          <Text style={prevShopStyles.bannerInner}>Total items: 7</Text>
+        </View>
+        <View style={styles.banner}>
+          <Text style={prevShopStyles.bannerInnerHeader}>2nd October 2020</Text>
+          <Text style={prevShopStyles.bannerInner}>
+            Mile total: 999,999 miles
+          </Text>
+          <Text style={prevShopStyles.bannerInner}>Total items: 756</Text>
+        </View>
+        <View style={styles.banner}>
+          <Text style={prevShopStyles.bannerInnerHeader}>
+            1st December 3009
+          </Text>
+          <Text style={prevShopStyles.bannerInner}>Mile total: 20 miles</Text>
+          <Text style={prevShopStyles.bannerInner}>Total items: 1</Text>
+        </View>
+        <View style={styles.banner}>
+          <Text style={prevShopStyles.bannerInnerHeader}>
+            1st December 3009
+          </Text>
+          <Text style={prevShopStyles.bannerInner}>Mile total: 20 miles</Text>
+          <Text style={prevShopStyles.bannerInner}>Total items: 1</Text>
+        </View>
+        <View style={styles.banner}>
+          <Text style={prevShopStyles.bannerInnerHeader}>
+            1st December 3009
+          </Text>
+          <Text style={prevShopStyles.bannerInner}>Mile total: 20 miles</Text>
+          <Text style={prevShopStyles.bannerInner}>Total items: 1</Text>
+        </View>
+        <View style={styles.banner}>
+          <Text style={prevShopStyles.bannerInnerHeader}>
+            1st December 3009
+          </Text>
+          <Text style={prevShopStyles.bannerInner}>Mile total: 20 miles</Text>
+          <Text style={prevShopStyles.bannerInner}>Total items: 1</Text>
         </View>
       </View>
     );

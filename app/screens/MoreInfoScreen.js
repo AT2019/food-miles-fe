@@ -12,18 +12,11 @@ export default class CameraScreen extends Component {
 
   render() {
     return (
-      <View style={{ flex: 1 }}>
-        <Hero message="Where did your food come from?" />
+      <View style={styles.mainContainer}>
+        <Hero message="Add more information to your shop" icon="plus" />
 
         <View style={infoStyles.banner}>
-          <Text style={[font.white, font.center]}>
-            Your food in total has travelled: 923,842 miles!
-          </Text>
-        </View>
-        <View style={infoStyles.banner}>
-          <Text style={[font.white, font.center]}>
-            Your last shop was 39 miles!
-          </Text>
+          <Text style={[font.white, font.center]}>The map will go here</Text>
         </View>
       </View>
     );
@@ -32,10 +25,13 @@ export default class CameraScreen extends Component {
 
 const infoStyles = StyleSheet.create({
   banner: {
-    margin: 10,
     backgroundColor: "#4CAF50",
+    marginTop: 10,
+    marginLeft: 10,
+    marginRight: 10,
     paddingTop: 5,
     paddingBottom: 5,
     borderRadius: 4
-  }
+  },
+  menu: {}
 });
