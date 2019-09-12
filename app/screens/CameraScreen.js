@@ -2,13 +2,15 @@ import React, { Component } from "react";
 import { StyleSheet, Text, View, Button, TouchableOpacity } from "react-native";
 import * as Permissions from "expo-permissions";
 import { Camera } from "expo-camera";
-
+import Hero from "../components/Hero";
 import font from "../styles/font";
+import RNPickerSelect from "react-native-picker-select";
 
 export default class CameraScreen extends Component {
   state = {
     hasCameraPermission: null,
-    type: Camera.Constants.Type.back
+    type: Camera.Constants.Type.back,
+    pickedType: false
   };
 
   async componentDidMount() {
@@ -44,7 +46,7 @@ export default class CameraScreen extends Component {
 
   render() {
     const { navigate } = this.props.navigation;
-    const { hasCameraPermission, type } = this.state;
+    const { hasCameraPermission, type, pickedType } = this.state;
     if (hasCameraPermission === null) {
       return <Text>No permissions for camera!</Text>;
     } else if (hasCameraPermission === false) {
@@ -52,31 +54,52 @@ export default class CameraScreen extends Component {
     } else {
       return (
         <View style={{ flex: 1 }}>
-          <View style={camStyles.cameraContainer}>
-            <Camera
-              type={type}
-              ref={ref => (this.camera = ref)}
-              style={camStyles.camera}
-            ></Camera>
-            <TouchableOpacity
-              style={camStyles.snapButton}
-              onPress={() => this.snapPhoto()}
-            >
-              <Text style={font.white}>Snap Photo!</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={camStyles.infoButton}
-              onPress={() => navigate("MoreInfo")}
-            >
-              <Text style={font.white}>More Information</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={camStyles.infoButton}
-              onPress={() => navigate("NotWorking")}
-            >
-              <Text style={font.white}>Not working?</Text>
-            </TouchableOpacity>
-          </View>
+          {pickedType ? (
+            <View style={camStyles.cameraContainer}>
+              <Camera
+                type={type}
+                ref={ref => (this.camera = ref)}
+                style={camStyles.camera}
+              ></Camera>
+              <TouchableOpacity
+                style={camStyles.snapButton}
+                onPress={() => this.snapPhoto()}
+              >
+                <Text style={font.white}>Snap Photo!</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={camStyles.infoButton}
+                onPress={() => navigate("MoreInfo")}
+              >
+                <Text style={font.white}>More Information</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={camStyles.infoButton}
+                onPress={() => navigate("NotWorking")}
+              >
+                <Text style={font.white}>Not working?</Text>
+              </TouchableOpacity>
+            </View>
+          ) : (
+            <View style={{ flex: 1 }}>
+              <Hero
+                message="What type of food are you scanning?"
+                icon="camera"
+              />
+
+              <RNPickerSelect
+                style={{
+                  backgroundColor: "red"
+                }}
+                onValueChange={value => this.setState({ pickedType: value })}
+                items={[
+                  { label: "Football", value: "football" },
+                  { label: "Baseball", value: "baseball" },
+                  { label: "Hockey", value: "hockey" }
+                ]}
+              />
+            </View>
+          )}
         </View>
       );
     }
