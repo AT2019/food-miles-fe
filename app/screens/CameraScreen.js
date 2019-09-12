@@ -10,7 +10,8 @@ export default class CameraScreen extends Component {
   state = {
     hasCameraPermission: null,
     type: Camera.Constants.Type.back,
-    pickedType: false
+    pickedType: false,
+    currentType: null
   };
 
   async componentDidMount() {
@@ -92,7 +93,16 @@ export default class CameraScreen extends Component {
                 style={{
                   backgroundColor: "red"
                 }}
-                onValueChange={value => this.setState({ pickedType: value })}
+                onDonePress={done => {
+                  this.setState({
+                    pickedType: this.state.currentType
+                  });
+                }}
+                onValueChange={value =>
+                  this.setState({
+                    currentType: value
+                  })
+                }
                 items={[
                   { label: "Football", value: "football" },
                   { label: "Baseball", value: "baseball" },

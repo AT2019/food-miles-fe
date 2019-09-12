@@ -27,21 +27,8 @@ export default class Dashboard extends Component {
         <View style={styles.container}>
           <Input placeholder="What country is the food from?" />
           <View style={notWorkingStyle.banner}>
-            <Text style={[font.white, font.center]}>
-              What type of food was this item?
-            </Text>
+            <Text style={[font.white, font.center]}>Something here</Text>
           </View>
-          <RNPickerSelect
-            style={{
-              backgroundColor: "red"
-            }}
-            onValueChange={value => console.log(value)}
-            items={[
-              { label: "Football", value: "football" },
-              { label: "Baseball", value: "baseball" },
-              { label: "Hockey", value: "hockey" }
-            ]}
-          />
 
           <TouchableOpacity style={notWorkingStyle.button}>
             <Text style={[font.white, font.center]}>Submit Information</Text>
