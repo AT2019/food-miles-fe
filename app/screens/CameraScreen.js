@@ -56,6 +56,7 @@ export default class CameraScreen extends Component {
         <View style={{ flex: 1 }}>
           {pickedType ? (
             <View style={camStyles.cameraContainer}>
+              <Text>Food type: {pickedType}</Text>
               <Camera
                 type={type}
                 ref={ref => (this.camera = ref)}
