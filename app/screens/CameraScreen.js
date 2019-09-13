@@ -5,13 +5,24 @@ import { Camera } from "expo-camera";
 import Hero from "../components/Hero";
 import font from "../styles/font";
 import RNPickerSelect from "react-native-picker-select";
+import frisbee from "frisbee";
+import { getCountryFromPhoto } from "../../utils/api";
 
 export default class CameraScreen extends Component {
   state = {
     hasCameraPermission: null,
     type: Camera.Constants.Type.back,
     pickedType: false,
-    currentType: null
+    currentType: null,
+    countries: [
+      {
+        _id: "Scotland",
+        capital: "Edinburgh",
+        Distance: 534,
+        Latitude: 55.953251,
+        Longtitude: -3.70379
+      }
+    ]
   };
 
   async componentDidMount() {
@@ -30,18 +41,24 @@ export default class CameraScreen extends Component {
       alert("Taking a photo!");
       const options = {
         quality: 1,
-        base64: true,
+        base64: false,
         fixOrientation: true,
         exif: true
       };
 
-      await this.camera.takePictureAsync(options).then(photo => {
-        photo.exif.Orientation = 1;
-        // Photo uri is the location of the photo.
-        console.log(photo.base64);
+      await this.camera
+        .takePictureAsync(options)
+        .then(photo => {
+          photo.exif.Orientation = 1;
+          getCountryFromPhoto(photo.uri);
+          // Photo uri is the location of the photo.
+          console.log(photo.uri);
 
-        // This is where we pass `photo` into the API
-      });
+          // This is where we pass `photo` into the API
+        })
+        .then(country => {
+          this.setState({ countries: country });
+        });
     }
   }
 
@@ -71,7 +88,11 @@ export default class CameraScreen extends Component {
               </TouchableOpacity>
               <TouchableOpacity
                 style={camStyles.infoButton}
-                onPress={() => navigate("MoreInfo")}
+                onPress={() =>
+                  navigate("MoreInfo", {
+                    countries: this.state.countries
+                  })
+                }
               >
                 <Text style={font.white}>More Information</Text>
               </TouchableOpacity>

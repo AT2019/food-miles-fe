@@ -8,36 +8,29 @@ import font from "../styles/font";
 
 export default class CameraScreen extends Component {
   state = {
-    countries: [
-      {
-        _id: "Scotland",
-        capital: "Edinburgh",
-        Distance: 534,
-        Latitude: 55.953251,
-        Longtitude: -3.70379
-      },
-      {
-        _id: "Spain",
-        capital: "Madrid",
-        Distance: 1265,
-        Latitude: 40.416775,
-        Longtitude: -3.70379
-      },
-      {
-        _id: "Wales",
-        capital: "Cardiff",
-        Distance: 212,
-        Latitude: 51.481583,
-        Longtitude: -3.17909
-      },
-      {
-        _id: "Italy",
-        capital: "Rome",
-        Distance: 1434,
-        Latitude: 41.902782,
-        Longtitude: 12.496365
-      }
-    ]
+    // countries: [
+    //   {
+    //     _id: "Scotland",
+    //     capital: "Edinburgh",
+    //     Distance: 534,
+    //     Latitude: 55.953251,
+    //     Longtitude: -3.70379
+    //     // },
+    //     // {
+    //     //   _id: "Spain",
+    //     //   capital: "Madrid",
+    //     //   Distance: 1265,
+    //     //   Latitude: 40.416775,
+    //     //   Longtitude: -3.70379
+    //     // },
+    //     // {
+    //     //   _id: "Wales",
+    //     //   capital: "Cardiff",
+    //     //   Distance: 212,
+    //     //   Latitude: 51.481583,
+    //     //   Longtitude: -3.17909
+    //     // }
+    // ]
   };
 
   static navigationOptions = {
@@ -45,6 +38,7 @@ export default class CameraScreen extends Component {
   };
 
   render() {
+    console.log(this.props.navigation.state.params.countries);
     return (
       <>
         <View
@@ -64,7 +58,7 @@ export default class CameraScreen extends Component {
           showsUserLocation={true}
         >
           <View>
-            {this.state.countries.map(country => {
+            {this.props.navigation.state.params.countries.map(country => {
               return (
                 <>
                   <Marker
