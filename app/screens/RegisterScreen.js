@@ -6,7 +6,12 @@ import { Input } from 'react-native-elements';
 import styles from '../styles/main';
 import font from '../styles/font';
 
-export default class LoginScreen extends Component {
+export default class RegisterScreen extends Component {
+  state = {
+    username: '',
+    password: '',
+    email: ''
+  };
   static navigationOptions = {
     title: 'Register for FoodMiles'
   };
@@ -17,16 +22,29 @@ export default class LoginScreen extends Component {
         <Hero message='Register for FoodMiles!' icon='user' />
 
         <View style={regStyles.loginContainer}>
-          <Input placeholder='Your username' />
-          <Input placeholder='Your password' />
-          {console.log('test')}
+          <Input
+            placeholder='Your email'
+            onChangeText={text => this.setState({ email: text })}
+          />
+          <Input
+            placeholder='Your username'
+            onChangeText={text => this.setState({ username: text })}
+          />
+          <Input
+            placeholder='Your password'
+            secureTextEntry={true}
+            onChangeText={text => this.setState({ password: text })}
+          />
           <TouchableOpacity style={regStyles.registerButton}>
-            <Text style={[font.white, font.center]}>Register</Text>
+            <Text style={[font.white, font.center]} onPress={this.signUp}>
+              Register
+            </Text>
           </TouchableOpacity>
         </View>
       </View>
     );
   }
+  signUp() {}
 }
 
 const regStyles = StyleSheet.create({
