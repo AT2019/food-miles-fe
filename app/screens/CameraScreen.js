@@ -58,7 +58,9 @@ export default class CameraScreen extends Component {
         <View style={{ flex: 1 }}>
           {pickedType ? (
             <View style={camStyles.cameraContainer}>
-              <Text>Food type: {pickedType}</Text>
+              <View style={camStyles.infoButton}>
+                <Text style={font.white}>Food type: {pickedType}</Text>
+              </View>
               <Camera
                 type={type}
                 ref={ref => (this.camera = ref)}
@@ -92,9 +94,9 @@ export default class CameraScreen extends Component {
               <SignOut navigation={this.props.navigation} />
 
               <RNPickerSelect
-                style={{
-                  backgroundColor: 'red'
-                }}
+
+                style={pickerStyles}
+
                 onDonePress={done => {
                   this.setState({
                     pickedType: this.state.currentType
@@ -106,9 +108,18 @@ export default class CameraScreen extends Component {
                   })
                 }
                 items={[
-                  { label: 'Football', value: 'football' },
-                  { label: 'Baseball', value: 'baseball' },
-                  { label: 'Hockey', value: 'hockey' }
+                  { label: "Dairy", value: "dairy" },
+                  { label: "Fruit", value: "fruit" },
+                  { label: "Vegetables", value: "veg" },
+                  { label: "Juice", value: "juice" },
+                  { label: "Meat", value: "meat" },
+                  { label: "Fish", value: "fish" },
+                  { label: "Tinned Goods", value: "tins" },
+                  { label: "Frozen", value: "frozen" },
+                  { label: "Chilled Meals", value: "chilled" },
+                  { label: "Snacks", value: "snacks" },
+                  { label: "Dried Food", value: "dried" }
+
                 ]}
               />
             </View>
@@ -149,4 +160,19 @@ const camStyles = StyleSheet.create({
     marginTop: 10,
     alignItems: 'center'
   }
+});
+
+const pickerStyles = StyleSheet.create({
+  inputIOS: {
+    margin: 10,
+    alignSelf: "center",
+    paddingTop: 10,
+    paddingBottom: 10,
+    backgroundColor: "#4CAF50",
+    width: "90%",
+    borderRadius: 4,
+    paddingLeft: 10,
+    color: "white"
+  },
+  inputAndroid: {}
 });
