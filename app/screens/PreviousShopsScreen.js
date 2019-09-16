@@ -1,12 +1,13 @@
-import React, { Component } from "react";
-import { StyleSheet, Text, View } from "react-native";
-import Hero from "../components/Hero.js";
+import React, { Component } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import Hero from '../components/Hero.js';
 
-import styles from "../styles/main";
+import styles from '../styles/main';
+import SignOut from '../components/SignOut.js';
 
 export default class PreviousShopsScreen extends Component {
   static navigationOptions = {
-    title: "Your Previous Shops"
+    title: 'Your Previous Shops'
   };
 
   // We need to use a list view - I haven't done this only because you need to specify data
@@ -15,8 +16,8 @@ export default class PreviousShopsScreen extends Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <Hero message="Your previous shops!" icon="shopping-basket" />
-
+        <Hero message='Your previous shops!' icon='shopping-basket' />
+        <SignOut navigation={this.props.navigation} />
         <View style={styles.banner}>
           <Text style={prevShopStyles.bannerInnerHeader}>
             30th September 2019
@@ -67,46 +68,46 @@ export default class PreviousShopsScreen extends Component {
 const prevShopStyles = StyleSheet.create({
   bannerInner: {
     paddingLeft: 10,
-    color: "#FFFFFF"
+    color: '#FFFFFF'
   },
   bannerInnerHeader: {
     paddingLeft: 10,
-    color: "#FFFFFF",
+    color: '#FFFFFF',
     fontSize: 15,
-    textAlign: "center",
+    textAlign: 'center',
     paddingBottom: 6
   },
   cameraContainer: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center"
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   camera: {
     width: 250,
     height: 250
   },
   snapButton: {
-    backgroundColor: "#388E3C",
+    backgroundColor: '#388E3C',
     padding: 10,
-    alignItems: "center",
+    alignItems: 'center',
     borderRadius: 4,
     marginBottom: 10,
     width: 250,
     marginTop: 10,
-    alignItems: "center"
+    alignItems: 'center'
   },
   infoButton: {
-    backgroundColor: "#4CAF50",
+    backgroundColor: '#4CAF50',
     padding: 10,
-    alignItems: "center",
+    alignItems: 'center',
     borderRadius: 4,
     marginBottom: 10,
     width: 250,
     marginTop: 10,
-    alignItems: "center"
+    alignItems: 'center'
   },
   white: {
-    color: "#FFFFFF",
-    textAlign: "center"
+    color: '#FFFFFF',
+    textAlign: 'center'
   }
 });

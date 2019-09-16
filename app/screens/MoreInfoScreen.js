@@ -1,38 +1,39 @@
-import React, { Component } from "react";
-import { StyleSheet, Text, View } from "react-native";
-import MapView, { Marker, Polyline } from "react-native-maps";
-import Hero from "../components/Hero.js";
+import React, { Component } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import MapView, { Marker, Polyline } from 'react-native-maps';
+import Hero from '../components/Hero.js';
 
-import styles from "../styles/main";
-import font from "../styles/font";
+import styles from '../styles/main';
+import font from '../styles/font';
+import SignOut from '../components/SignOut.js';
 
 export default class CameraScreen extends Component {
   state = {
     countries: [
       {
-        _id: "Scotland",
-        capital: "Edinburgh",
+        _id: 'Scotland',
+        capital: 'Edinburgh',
         Distance: 534,
         Latitude: 55.953251,
         Longtitude: -3.70379
       },
       {
-        _id: "Spain",
-        capital: "Madrid",
+        _id: 'Spain',
+        capital: 'Madrid',
         Distance: 1265,
         Latitude: 40.416775,
         Longtitude: -3.70379
       },
       {
-        _id: "Wales",
-        capital: "Cardiff",
+        _id: 'Wales',
+        capital: 'Cardiff',
         Distance: 212,
         Latitude: 51.481583,
         Longtitude: -3.17909
       },
       {
-        _id: "Italy",
-        capital: "Rome",
+        _id: 'Italy',
+        capital: 'Rome',
         Distance: 1434,
         Latitude: 41.902782,
         Longtitude: 12.496365
@@ -41,7 +42,7 @@ export default class CameraScreen extends Component {
   };
 
   static navigationOptions = {
-    title: "More information!"
+    title: 'More information!'
   };
 
   render() {
@@ -50,7 +51,8 @@ export default class CameraScreen extends Component {
         <View
         // style={styles.mainContainer}
         >
-          <Hero message="Add more information to your shop" icon="plus" />
+          <Hero message='Add more information to your shop' icon='plus' />
+          <SignOut navigation={this.props.navigation} />
           {/* <View style={infoStyles.banner}></View> */}
         </View>
         <MapView
@@ -87,8 +89,8 @@ export default class CameraScreen extends Component {
                       }
                     ]}
                     strokeWidth={2}
-                    strokeColor={"#FF0000"}
-                    lineCap={"round"}
+                    strokeColor={'#FF0000'}
+                    lineCap={'round'}
                     geodesic={true}
                   />
                 </>
@@ -100,7 +102,7 @@ export default class CameraScreen extends Component {
               latitude: 51.5074,
               longitude: 0.1278
             }}
-            title={"London"}
+            title={'London'}
           />
         </MapView>
         <Text style={[font.white, font.center]}>The map will go here</Text>
@@ -132,6 +134,6 @@ const mapStyles = StyleSheet.create({
     marginBottom: 80,
     marginLeft: 30,
     marginRight: 30,
-    alignSelf: "center"
+    alignSelf: 'center'
   }
 });

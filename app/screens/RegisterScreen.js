@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Alert } from 'react-native';
 import Hero from '../components/Hero.js';
 import { Input } from 'react-native-elements';
-
+import { createUser } from '../../utils/api';
 import styles from '../styles/main';
 import font from '../styles/font';
 
@@ -24,10 +24,12 @@ export default class RegisterScreen extends Component {
         <View style={regStyles.loginContainer}>
           <Input
             placeholder='Your email'
+            autoCapitalize='none'
             onChangeText={text => this.setState({ email: text })}
           />
           <Input
             placeholder='Your username'
+            autoCapitalize='none'
             onChangeText={text => this.setState({ username: text })}
           />
           <Input
@@ -36,7 +38,10 @@ export default class RegisterScreen extends Component {
             onChangeText={text => this.setState({ password: text })}
           />
           <TouchableOpacity style={regStyles.registerButton}>
-            <Text style={[font.white, font.center]} onPress={this.signUp}>
+            <Text
+              style={[font.white, font.center]}
+              onPress={() => this.signUp()}
+            >
               Register
             </Text>
           </TouchableOpacity>
@@ -44,7 +49,19 @@ export default class RegisterScreen extends Component {
       </View>
     );
   }
-  signUp() {}
+  signUp() {
+    const { username, email, password } = this.state;
+    createUser(username, email, password).then(user => {
+      if (user) {
+        Alert.alert(`${user} successfully signed up!`);
+        this.props.navigation.navigate('Dashboard');
+      } else {
+        Alert.alert('Error', 'Incorrect Username, Email or Password', [
+          { text: 'OK' }
+        ]);
+      }
+    });
+  }
 }
 
 const regStyles = StyleSheet.create({
