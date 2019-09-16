@@ -57,7 +57,9 @@ export default class CameraScreen extends Component {
         <View style={{ flex: 1 }}>
           {pickedType ? (
             <View style={camStyles.cameraContainer}>
-              <Text>Food type: {pickedType}</Text>
+              <View style={camStyles.infoButton}>
+                <Text style={font.white}>Food type: {pickedType}</Text>
+              </View>
               <Camera
                 type={type}
                 ref={ref => (this.camera = ref)}
@@ -165,7 +167,7 @@ const pickerStyles = StyleSheet.create({
     width: "90%",
     borderRadius: 4,
     paddingLeft: 10,
-    color: "#282828"
+    color: "white"
   },
   inputAndroid: {}
 });
