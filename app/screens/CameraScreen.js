@@ -1,10 +1,11 @@
-import React, { Component } from "react";
-import { StyleSheet, Text, View, Button, TouchableOpacity } from "react-native";
-import * as Permissions from "expo-permissions";
-import { Camera } from "expo-camera";
-import Hero from "../components/Hero";
-import font from "../styles/font";
-import RNPickerSelect from "react-native-picker-select";
+import React, { Component } from 'react';
+import { StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native';
+import * as Permissions from 'expo-permissions';
+import { Camera } from 'expo-camera';
+import Hero from '../components/Hero';
+import font from '../styles/font';
+import RNPickerSelect from 'react-native-picker-select';
+import SignOut from '../components/SignOut';
 
 export default class CameraScreen extends Component {
   state = {
@@ -17,17 +18,17 @@ export default class CameraScreen extends Component {
   async componentDidMount() {
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
     this.setState({
-      hasCameraPermission: status === "granted"
+      hasCameraPermission: status === 'granted'
     });
   }
 
   static navigationOptions = {
-    title: "Scan your food!"
+    title: 'Scan your food!'
   };
 
   async snapPhoto() {
     if (this.camera) {
-      alert("Taking a photo!");
+      alert('Taking a photo!');
       const options = {
         quality: 1,
         base64: true,
@@ -71,13 +72,13 @@ export default class CameraScreen extends Component {
               </TouchableOpacity>
               <TouchableOpacity
                 style={camStyles.infoButton}
-                onPress={() => navigate("MoreInfo")}
+                onPress={() => navigate('MoreInfo')}
               >
                 <Text style={font.white}>More Information</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={camStyles.infoButton}
-                onPress={() => navigate("NotWorking")}
+                onPress={() => navigate('NotWorking')}
               >
                 <Text style={font.white}>Not working?</Text>
               </TouchableOpacity>
@@ -85,13 +86,14 @@ export default class CameraScreen extends Component {
           ) : (
             <View style={{ flex: 1 }}>
               <Hero
-                message="What type of food are you scanning?"
-                icon="camera"
+                message='What type of food are you scanning?'
+                icon='camera'
               />
+              <SignOut navigation={this.props.navigation} />
 
               <RNPickerSelect
                 style={{
-                  backgroundColor: "red"
+                  backgroundColor: 'red'
                 }}
                 onDonePress={done => {
                   this.setState({
@@ -104,9 +106,9 @@ export default class CameraScreen extends Component {
                   })
                 }
                 items={[
-                  { label: "Football", value: "football" },
-                  { label: "Baseball", value: "baseball" },
-                  { label: "Hockey", value: "hockey" }
+                  { label: 'Football', value: 'football' },
+                  { label: 'Baseball', value: 'baseball' },
+                  { label: 'Hockey', value: 'hockey' }
                 ]}
               />
             </View>
@@ -120,31 +122,31 @@ export default class CameraScreen extends Component {
 const camStyles = StyleSheet.create({
   cameraContainer: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center"
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   camera: {
     width: 250,
     height: 250
   },
   snapButton: {
-    backgroundColor: "#388E3C",
+    backgroundColor: '#388E3C',
     padding: 10,
-    alignItems: "center",
+    alignItems: 'center',
     borderRadius: 4,
     marginBottom: 3,
     width: 250,
     marginTop: 10,
-    alignItems: "center"
+    alignItems: 'center'
   },
   infoButton: {
-    backgroundColor: "#4CAF50",
+    backgroundColor: '#4CAF50',
     padding: 10,
-    alignItems: "center",
+    alignItems: 'center',
     borderRadius: 4,
     marginBottom: 3,
     width: 250,
     marginTop: 10,
-    alignItems: "center"
+    alignItems: 'center'
   }
 });

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import {
   StyleSheet,
   Text,
@@ -6,26 +6,28 @@ import {
   Button,
   TouchableOpacity,
   Picker
-} from "react-native";
-import Hero from "../components/Hero.js";
-import { Input } from "react-native-elements";
-import RNPickerSelect from "react-native-picker-select";
+} from 'react-native';
+import Hero from '../components/Hero.js';
+import { Input } from 'react-native-elements';
+import RNPickerSelect from 'react-native-picker-select';
 
-import styles from "../styles/main";
-import font from "../styles/font";
+import styles from '../styles/main';
+import font from '../styles/font';
+import SignOut from '../components/SignOut.js';
 
 export default class Dashboard extends Component {
   static navigationOptions = {
-    title: "Not Working?"
+    title: 'Not Working?'
   };
 
   render() {
     return (
       <View style={styles.mainContainer}>
-        <Hero message="Fill in Information" icon="user" />
+        <Hero message='Fill in Information' icon='user' />
+        <SignOut navigation={this.props.navigation} />
 
         <View style={styles.container}>
-          <Input placeholder="What country is the food from?" />
+          <Input placeholder='What country is the food from?' />
           <View style={notWorkingStyle.banner}>
             <Text style={[font.white, font.center]}>Something here</Text>
           </View>
@@ -40,18 +42,18 @@ export default class Dashboard extends Component {
 }
 const notWorkingStyle = StyleSheet.create({
   button: {
-    backgroundColor: "#388E3C",
+    backgroundColor: '#388E3C',
     padding: 10,
     borderRadius: 4,
     marginBottom: 10,
-    alignSelf: "stretch",
+    alignSelf: 'stretch',
     marginLeft: 10,
     marginRight: 10,
     marginTop: 10
   },
   banner: {
-    backgroundColor: "#4CAF50",
-    alignSelf: "stretch",
+    backgroundColor: '#4CAF50',
+    alignSelf: 'stretch',
     marginTop: 10,
     marginLeft: 10,
     marginRight: 10,

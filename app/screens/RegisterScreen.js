@@ -24,10 +24,12 @@ export default class RegisterScreen extends Component {
         <View style={regStyles.loginContainer}>
           <Input
             placeholder='Your email'
+            autoCapitalize='none'
             onChangeText={text => this.setState({ email: text })}
           />
           <Input
             placeholder='Your username'
+            autoCapitalize='none'
             onChangeText={text => this.setState({ username: text })}
           />
           <Input
@@ -51,6 +53,7 @@ export default class RegisterScreen extends Component {
     const { username, email, password } = this.state;
     createUser(username, email, password).then(user => {
       if (user) {
+        Alert.alert(`${user} successfully signed up!`);
         this.props.navigation.navigate('Dashboard');
       } else {
         Alert.alert('Error', 'Incorrect Username, Email or Password', [

@@ -1,5 +1,12 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Alert } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  Alert,
+  AsyncStorage
+} from 'react-native';
 import Hero from '../components/Hero.js';
 import { Input } from 'react-native-elements';
 import { loginUser } from '../../utils/api';
@@ -22,6 +29,7 @@ export default class LoginScreen extends Component {
         <View style={loginStyles.loginContainer}>
           <Input
             placeholder='Your email'
+            autoCapitalize='none'
             onChangeText={text => this.setState({ email: text })}
           />
           <Input
@@ -45,6 +53,13 @@ export default class LoginScreen extends Component {
     const { email, password } = this.state;
     loginUser(email, password).then(token => {
       if (!token.msg) {
+        storeData = async () => {
+          try {
+            await AsyncStorage.setItem(`key:JWT', 'value:${token}`);
+          } catch (error) {
+            console.log(error);
+          }
+        };
         this.props.navigation.navigate('Dashboard');
       } else {
         Alert.alert('Error', 'Incorrect Email or Password', [{ text: 'OK' }]);
