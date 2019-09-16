@@ -1,20 +1,20 @@
-import React from 'react';
-import { StyleSheet, Text, View, Alert, AsyncStorage } from 'react-native';
-import { Button } from 'react-native-elements';
+import React from "react";
+import { StyleSheet, Text, View, Alert, AsyncStorage } from "react-native";
+import { Button } from "react-native-elements";
 
 export default function SignOut(props) {
   signOutUser = () => {
     Alert.alert(
-      'ARE YOU SURE YOU WANT TO LOG OUT?',
-      '',
+      "ARE YOU SURE YOU WANT TO LOG OUT?",
+      "",
       [
         {
-          text: 'Cancel',
-          onPress: () => console.log('Cancel Pressed'),
-          style: 'cancel'
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel"
         },
         {
-          text: 'OK',
+          text: "OK",
           onPress: () => this.removeData()
         }
       ],
@@ -23,15 +23,19 @@ export default function SignOut(props) {
   };
   removeData = async () => {
     try {
-      await props.navigation.navigate('Home');
-      await AsyncStorage.removeItem('key:JWT');
+      await props.navigation.navigate("Home");
+      await AsyncStorage.removeItem("key:JWT");
     } catch (error) {
       console.log(error);
     }
   };
   return (
     <View>
-      <Button title='Sign Out' onPress={this.signOutUser} />
+      <Button
+        title="Sign Out"
+        onPress={this.signOutUser}
+        style={{ margin: 10 }}
+      />
     </View>
   );
 }
