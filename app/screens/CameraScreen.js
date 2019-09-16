@@ -90,9 +90,7 @@ export default class CameraScreen extends Component {
               />
 
               <RNPickerSelect
-                style={{
-                  backgroundColor: "red"
-                }}
+                style={pickerStyles}
                 onDonePress={done => {
                   this.setState({
                     pickedType: this.state.currentType
@@ -147,4 +145,19 @@ const camStyles = StyleSheet.create({
     marginTop: 10,
     alignItems: "center"
   }
+});
+
+const pickerStyles = StyleSheet.create({
+  inputIOS: {
+    margin: 10,
+    alignSelf: "center",
+    paddingTop: 10,
+    paddingBottom: 10,
+    backgroundColor: "#4CAF50",
+    width: "90%",
+    borderRadius: 4,
+    paddingLeft: 10,
+    color: "#282828"
+  },
+  inputAndroid: {}
 });
