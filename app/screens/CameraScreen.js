@@ -102,9 +102,17 @@ export default class CameraScreen extends Component {
                   })
                 }
                 items={[
-                  { label: "Football", value: "football" },
-                  { label: "Baseball", value: "baseball" },
-                  { label: "Hockey", value: "hockey" }
+                  { label: "Dairy", value: "dairy" },
+                  { label: "Fruit", value: "fruit" },
+                  { label: "Vegetables", value: "veg" },
+                  { label: "Juice", value: "juice" },
+                  { label: "Meat", value: "meat" },
+                  { label: "Fish", value: "fish" },
+                  { label: "Tinned Goods", value: "tins" },
+                  { label: "Frozen", value: "frozen" },
+                  { label: "Chilled Meals", value: "chilled" },
+                  { label: "Snacks", value: "snacks" },
+                  { label: "Dried Food", value: "dried" }
                 ]}
               />
             </View>
