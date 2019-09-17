@@ -2,9 +2,13 @@ import React, { Component } from "react";
 import { StyleSheet, Text, View, Button, TouchableOpacity } from "react-native";
 import * as Permissions from "expo-permissions";
 import { Camera } from "expo-camera";
+import * as ImagePicker from "expo-image-picker";
+import * as ImageManipulator from "expo-image-manipulator";
 import Hero from "../components/Hero";
 import font from "../styles/font";
 import RNPickerSelect from "react-native-picker-select";
+import { getCountryFromPhoto } from "../../utils/api";
+import { Tesseract } from "../../utils/Tesseract";
 
 export default class CameraScreen extends Component {
   state = {
@@ -16,6 +20,7 @@ export default class CameraScreen extends Component {
 
   async componentDidMount() {
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
+    const { status2 } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
     this.setState({
       hasCameraPermission: status === "granted"
     });
@@ -30,18 +35,32 @@ export default class CameraScreen extends Component {
       alert("Taking a photo!");
       const options = {
         quality: 1,
-        base64: true,
+        base64: false,
         fixOrientation: true,
         exif: true
       };
 
-      await this.camera.takePictureAsync(options).then(photo => {
+      await this.camera.takePictureAsync(options).then(async photo => {
         photo.exif.Orientation = 1;
         // Photo uri is the location of the photo.
-        console.log(photo.base64);
-
+        // console.log(photo.base64);
+        // const manipPhoto = await ImageManipulator.manipulateAsync(
+        //   photo.uri,
+        //   [],
+        //   {
+        //     compress: 0.05,
+        //     format: ImageManipulator.SaveFormat.PNG,
+        //     base64: true
+        //   }
+        // );
+        getCountryFromPhoto(photo);
         // This is where we pass `photo` into the API
       });
+      // const image = await ImagePicker.launchCameraAsync({
+      //   mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      //   quality: 0.1
+      // });
+      // getCountryFromPhoto(image);
     }
   }
 
