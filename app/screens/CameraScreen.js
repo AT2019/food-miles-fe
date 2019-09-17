@@ -74,9 +74,9 @@ export default class CameraScreen extends Component {
               </TouchableOpacity>
               <TouchableOpacity
                 style={camStyles.infoButton}
-                onPress={() => navigate("MoreInfo")}
+                onPress={() => navigate("PreviousShops")}
               >
-                <Text style={font.white}>More Information</Text>
+                <Text style={font.white}>End Shop</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={camStyles.infoButton}
