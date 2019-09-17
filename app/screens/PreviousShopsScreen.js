@@ -1,23 +1,32 @@
-import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import Hero from '../components/Hero.js';
-
-import styles from '../styles/main';
-import SignOut from '../components/SignOut.js';
+import React, { Component } from "react";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import Hero from "../components/Hero.js";
+import font from "../styles/font";
+import styles from "../styles/main";
+import SignOut from "../components/SignOut.js";
 
 export default class PreviousShopsScreen extends Component {
   static navigationOptions = {
-    title: 'Your Previous Shops'
+    title: "Your Previous Shops"
   };
 
   // We need to use a list view - I haven't done this only because you need to specify data
   // in the ListView
 
   render() {
+    const { navigate } = this.props.navigation;
     return (
       <View style={{ flex: 1 }}>
-        <Hero message='Your previous shops!' icon='shopping-basket' />
+        <Hero message="Your previous shops!" icon="shopping-basket" />
         <SignOut navigation={this.props.navigation} />
+
+        <TouchableOpacity
+          style={styles.banner}
+          onPress={() => navigate("MoreInfo")}
+        >
+          <Text style={[font.white, font.center]}>View the map</Text>
+        </TouchableOpacity>
+
         <View style={styles.banner}>
           <Text style={prevShopStyles.bannerInnerHeader}>
             30th September 2019
@@ -68,46 +77,45 @@ export default class PreviousShopsScreen extends Component {
 const prevShopStyles = StyleSheet.create({
   bannerInner: {
     paddingLeft: 10,
-    color: '#FFFFFF'
+    color: "#FFFFFF"
   },
   bannerInnerHeader: {
     paddingLeft: 10,
-    color: '#FFFFFF',
+    color: "#FFFFFF",
     fontSize: 15,
-    textAlign: 'center',
+    textAlign: "center",
     paddingBottom: 6
   },
   cameraContainer: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
+    alignItems: "center",
+    justifyContent: "center"
   },
   camera: {
     width: 250,
     height: 250
   },
   snapButton: {
-    backgroundColor: '#388E3C',
+    backgroundColor: "#388E3C",
     padding: 10,
-    alignItems: 'center',
+    alignItems: "center",
     borderRadius: 4,
     marginBottom: 10,
     width: 250,
     marginTop: 10,
-    alignItems: 'center'
+    alignItems: "center"
   },
   infoButton: {
-    backgroundColor: '#4CAF50',
+    backgroundColor: "#4CAF50",
     padding: 10,
-    alignItems: 'center',
+    alignItems: "center",
     borderRadius: 4,
     marginBottom: 10,
     width: 250,
-    marginTop: 10,
-    alignItems: 'center'
+    marginTop: 10
   },
   white: {
-    color: '#FFFFFF',
-    textAlign: 'center'
+    color: "#FFFFFF",
+    textAlign: "center"
   }
 });
