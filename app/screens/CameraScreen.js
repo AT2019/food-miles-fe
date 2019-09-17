@@ -2,13 +2,10 @@ import React, { Component } from "react";
 import { StyleSheet, Text, View, Button, TouchableOpacity } from "react-native";
 import * as Permissions from "expo-permissions";
 import { Camera } from "expo-camera";
-import * as ImagePicker from "expo-image-picker";
-import * as ImageManipulator from "expo-image-manipulator";
 import Hero from "../components/Hero";
 import font from "../styles/font";
 import RNPickerSelect from "react-native-picker-select";
 import { getCountryFromPhoto } from "../../utils/api";
-import { Tesseract } from "../../utils/Tesseract";
 
 export default class CameraScreen extends Component {
   state = {
@@ -35,7 +32,7 @@ export default class CameraScreen extends Component {
       alert("Taking a photo!");
       const options = {
         quality: 1,
-        base64: false,
+        base64: true,
         fixOrientation: true,
         exif: true
       };
@@ -104,40 +101,40 @@ export default class CameraScreen extends Component {
               </TouchableOpacity>
             </View>
           ) : (
-            <View style={{ flex: 1 }}>
-              <Hero
-                message="What type of food are you scanning?"
-                icon="camera"
-              />
+              <View style={{ flex: 1 }}>
+                <Hero
+                  message="What type of food are you scanning?"
+                  icon="camera"
+                />
 
-              <RNPickerSelect
-                style={pickerStyles}
-                onDonePress={done => {
-                  this.setState({
-                    pickedType: this.state.currentType
-                  });
-                }}
-                onValueChange={value =>
-                  this.setState({
-                    currentType: value
-                  })
-                }
-                items={[
-                  { label: "Dairy", value: "dairy" },
-                  { label: "Fruit", value: "fruit" },
-                  { label: "Vegetables", value: "veg" },
-                  { label: "Juice", value: "juice" },
-                  { label: "Meat", value: "meat" },
-                  { label: "Fish", value: "fish" },
-                  { label: "Tinned Goods", value: "tins" },
-                  { label: "Frozen", value: "frozen" },
-                  { label: "Chilled Meals", value: "chilled" },
-                  { label: "Snacks", value: "snacks" },
-                  { label: "Dried Food", value: "dried" }
-                ]}
-              />
-            </View>
-          )}
+                <RNPickerSelect
+                  style={pickerStyles}
+                  onDonePress={done => {
+                    this.setState({
+                      pickedType: this.state.currentType
+                    });
+                  }}
+                  onValueChange={value =>
+                    this.setState({
+                      currentType: value
+                    })
+                  }
+                  items={[
+                    { label: "Dairy", value: "dairy" },
+                    { label: "Fruit", value: "fruit" },
+                    { label: "Vegetables", value: "veg" },
+                    { label: "Juice", value: "juice" },
+                    { label: "Meat", value: "meat" },
+                    { label: "Fish", value: "fish" },
+                    { label: "Tinned Goods", value: "tins" },
+                    { label: "Frozen", value: "frozen" },
+                    { label: "Chilled Meals", value: "chilled" },
+                    { label: "Snacks", value: "snacks" },
+                    { label: "Dried Food", value: "dried" }
+                  ]}
+                />
+              </View>
+            )}
         </View>
       );
     }
