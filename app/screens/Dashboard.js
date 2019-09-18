@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
+import { Text, View, TouchableOpacity, AsyncStorage } from 'react-native';
 import Hero from '../components/Hero.js';
 
 import styles from '../styles/main';

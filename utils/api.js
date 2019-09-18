@@ -29,6 +29,13 @@ export const createUser = (name, email, password) => {
     .catch(err => err);
 };
 
+
+export const getPrevShoppingLists = email => {
+  return api
+    .get('/prevShopping', { params: { email } })
+    .then(({ body }) => body.shoppings);
+};
+
 export const getUsers = () => {
   return api
     //if you want to use it locally get the ip address from expo client - should something like 192.168.0.0 or 10.0.0.0 replace 0's as appropriate
@@ -60,3 +67,4 @@ export const getCountryFromPhoto = photo => {
 };
 
 // IP address 192.168.230.200
+
