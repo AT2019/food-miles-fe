@@ -11,7 +11,6 @@ import MoreInfoScreen from "./app/screens/MoreInfoScreen";
 import Dashboard from "./app/screens/Dashboard";
 import PreviousShopsScreen from "./app/screens/PreviousShopsScreen";
 import NotWorkingScreen from "./app/screens/NotWorkingScreen";
-import ImageScreen from "./app/screens/ImageScreen";
 
 const MainNavigator = createStackNavigator({
   Home: {
@@ -38,9 +37,6 @@ const MainNavigator = createStackNavigator({
   NotWorking: {
     screen: NotWorkingScreen
   },
-  ImageScreen: {
-    screen: ImageScreen
-  }
 });
 
 const App = createAppContainer(MainNavigator);
