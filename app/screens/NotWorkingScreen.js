@@ -18,28 +18,16 @@ export default class Dashboard extends Component {
   };
 
   notWorkingCall = () => {
-    console.log("Called notWorkingCall!");
+
     const country = this.state.inputCountry;
-    console.log(country);
+
 
     getCountryWithTypedInput(country)
-    .then(country => {
-      console.log("retunred", country)
-    })
+      .then(country => {
+       return this.props.navigation.navigate("Camera", { country })
+      })
 
-    // return api
-    //   .get(`/countries/${country}`)
-    //   .then(body => {
-    //     console.log(body.body.country);
-    //     console.log("Inside of API then block");
-    //     this.setState({
-    //       countryInfo: body.body.country
-    //     });
-    //   })
-    //   .catch(err => console.log(err));
 
-    // return api.getCountry(country).then(countryInfo => {
-    // });
   };
 
   render() {
