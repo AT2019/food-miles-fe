@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   StyleSheet,
   Text,
@@ -6,34 +6,34 @@ import {
   TouchableOpacity,
   Alert,
   AsyncStorage
-} from 'react-native';
-import Hero from '../components/Hero.js';
-import { Input } from 'react-native-elements';
-import { loginUser } from '../../utils/api';
-import styles from '../styles/main';
-import font from '../styles/font';
+} from "react-native";
+import Hero from "../components/Hero.js";
+import { Input } from "react-native-elements";
+import { loginUser } from "../../utils/api";
+import styles from "../styles/main";
+import font from "../styles/font";
 
 export default class LoginScreen extends Component {
   state = {
-    email: '',
-    password: ''
+    email: "",
+    password: ""
   };
   static navigationOptions = {
-    title: 'Login to FoodMiles'
+    title: ""
   };
 
   render() {
     return (
       <View style={styles.mainContainer}>
-        <Hero message='Login to FoodMiles!' icon='user' />
+        <Hero message="Login to FoodMiles!" icon="user" />
         <View style={loginStyles.loginContainer}>
           <Input
-            placeholder='Your email'
-            autoCapitalize='none'
+            placeholder="Your email"
+            autoCapitalize="none"
             onChangeText={text => this.setState({ email: text })}
           />
           <Input
-            placeholder='Your password'
+            placeholder="Your password"
             secureTextEntry={true}
             onChangeText={text => this.setState({ password: text })}
           />
@@ -53,11 +53,11 @@ export default class LoginScreen extends Component {
     const { email, password } = this.state;
     loginUser(email, password).then(token => {
       if (!token.msg) {
-        AsyncStorage.setItem('email', email);
-        AsyncStorage.setItem('jwt', token);
-        this.props.navigation.navigate('Dashboard');
+        AsyncStorage.setItem("email", email);
+        AsyncStorage.setItem("jwt", token);
+        this.props.navigation.navigate("Dashboard");
       } else {
-        Alert.alert('Error', 'Incorrect Email or Password', [{ text: 'OK' }]);
+        Alert.alert("Error", "Incorrect Email or Password", [{ text: "OK" }]);
       }
     });
   }
@@ -69,15 +69,15 @@ const loginStyles = StyleSheet.create({
   },
   loginContainer: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
+    justifyContent: "center",
+    alignItems: "center"
   },
   loginButton: {
-    backgroundColor: '#388E3C',
+    backgroundColor: "#388E3C",
     padding: 10,
     borderRadius: 4,
     marginBottom: 10,
-    alignSelf: 'stretch',
+    alignSelf: "stretch",
     marginLeft: 10,
     marginRight: 10,
     marginTop: 10

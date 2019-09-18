@@ -25,7 +25,7 @@ export default class CameraScreen extends Component {
   }
 
   static navigationOptions = {
-    title: "Scan your food!"
+    title: ""
   };
 
   async snapPhoto() {
@@ -119,7 +119,6 @@ export default class CameraScreen extends Component {
                   { label: "Dried Food", value: "dried" }
                 ]}
               />
-              <SignOut navigation={this.props.navigation} />
             </View>
           )}
         </View>
