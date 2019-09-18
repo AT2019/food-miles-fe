@@ -1,10 +1,10 @@
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
 
-import Icon from "react-native-vector-icons/FontAwesome";
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default function Hero(props) {
-  const getIconChoice = props.icon || "plane";
+  const getIconChoice = props.icon || 'plane';
 
   return (
     <View style={styles.hero}>
@@ -16,20 +16,20 @@ export default function Hero(props) {
 
 const styles = StyleSheet.create({
   hero: {
-    backgroundColor: "#4CAF50",
+    backgroundColor: '#4CAF50',
     height: 110,
-    justifyContent: "center",
+    justifyContent: 'center',
     borderBottomWidth: 1,
-    borderBottomColor: "#388E3C"
+    borderBottomColor: '#388E3C'
   },
   white: {
-    color: "#FFFFFF",
-    textAlign: "center",
+    color: '#FFFFFF',
+    textAlign: 'center',
     fontSize: 20
   },
   whiteIcon: {
-    color: "#FFFFFF",
-    textAlign: "center",
+    color: '#FFFFFF',
+    textAlign: 'center',
     fontSize: 20,
     marginTop: 10
   }
