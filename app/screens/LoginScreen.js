@@ -5,7 +5,8 @@ import {
   View,
   TouchableOpacity,
   Alert,
-  AsyncStorage
+  AsyncStorage,
+  Image
 } from "react-native";
 import Hero from "../components/Hero.js";
 import { Input } from "react-native-elements";
@@ -24,8 +25,19 @@ export default class LoginScreen extends Component {
 
   render() {
     return (
-      <View style={styles.mainContainer}>
+      <View>
         <Hero message="Login to FoodMiles!" icon="user" />
+        <View
+          style={{
+            flex: 1,
+            resizeMode: "cover"
+          }}
+        >
+          <Image
+            source={require("../../assets/bg.jpeg")}
+            style={{ opacity: 0.5 }}
+          />
+        </View>
         <View style={loginStyles.loginContainer}>
           <Input
             placeholder="Your email"
@@ -68,7 +80,6 @@ const loginStyles = StyleSheet.create({
     flex: 1
   },
   loginContainer: {
-    flex: 1,
     justifyContent: "center",
     alignItems: "center"
   },

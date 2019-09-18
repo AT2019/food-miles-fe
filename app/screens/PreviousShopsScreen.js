@@ -5,7 +5,8 @@ import {
   View,
   TouchableOpacity,
   AsyncStorage,
-  FlatList
+  FlatList,
+  Image
 } from "react-native";
 
 import Hero from "../components/Hero.js";
@@ -32,10 +33,19 @@ export default class PreviousShopsScreen extends Component {
     const { prevShoppingLists, isLoading, error } = this.state;
     return (
       <>
-        <View style={{ flex: 1 }}>
+        <View>
           <Hero message="Your previous shops!" icon="shopping-basket" />
-          <SignOut navigation={this.props.navigation} />
-
+          <View
+            style={{
+              flex: 1,
+              resizeMode: "cover"
+            }}
+          >
+            <Image
+              source={require("../../assets/bg.jpeg")}
+              style={{ opacity: 0.5 }}
+            />
+          </View>
           <TouchableOpacity
             style={styles.banner}
             onPress={() => navigate("MoreInfo")}

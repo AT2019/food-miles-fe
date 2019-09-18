@@ -1,5 +1,12 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, TouchableOpacity, Alert } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  Alert,
+  Image
+} from "react-native";
 import Hero from "../components/Hero.js";
 import { Input } from "react-native-elements";
 import { createUser } from "../../utils/api";
@@ -18,8 +25,20 @@ export default class RegisterScreen extends Component {
 
   render() {
     return (
-      <View style={styles.mainContainer}>
+      <View>
         <Hero message="Register for FoodMiles!" icon="user" />
+
+        <View
+          style={{
+            flex: 1,
+            resizeMode: "cover"
+          }}
+        >
+          <Image
+            source={require("../../assets/bg.jpeg")}
+            style={{ opacity: 0.5 }}
+          />
+        </View>
 
         <View style={regStyles.loginContainer}>
           <Input
@@ -66,7 +85,7 @@ export default class RegisterScreen extends Component {
 
 const regStyles = StyleSheet.create({
   loginContainer: {
-    flex: 1,
+    // flex: 1,
     justifyContent: "center",
     alignItems: "center"
   },

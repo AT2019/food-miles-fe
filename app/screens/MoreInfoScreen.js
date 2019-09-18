@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Image } from "react-native";
 import MapView, { Marker, Polyline } from "react-native-maps";
 import Hero from "../components/Hero.js";
 
@@ -52,6 +52,18 @@ export default class CameraScreen extends Component {
         // style={styles.mainContainer}
         >
           <Hero message="Add more information to your shop" icon="plus" />
+
+          <View
+            style={{
+              flex: 1,
+              resizeMode: "cover"
+            }}
+          >
+            <Image
+              source={require("../../assets/bg.jpeg")}
+              style={{ opacity: 0.5 }}
+            />
+          </View>
           <SignOut navigation={this.props.navigation} />
           {/* <View style={infoStyles.banner}></View> */}
         </View>

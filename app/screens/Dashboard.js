@@ -1,5 +1,11 @@
 import React, { Component } from "react";
-import { Text, View, TouchableOpacity, AsyncStorage } from "react-native";
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  AsyncStorage,
+  Image
+} from "react-native";
 import Hero from "../components/Hero.js";
 
 import styles from "../styles/main";
@@ -16,6 +22,18 @@ export default class Dashboard extends Component {
     return (
       <View>
         <Hero message="Your Dashboard" icon="user" />
+
+        <View
+          style={{
+            flex: 1,
+            resizeMode: "cover"
+          }}
+        >
+          <Image
+            source={require("../../assets/bg.jpeg")}
+            style={{ opacity: 0.5 }}
+          />
+        </View>
 
         <View style={styles.buttonList}>
           <TouchableOpacity
