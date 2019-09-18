@@ -20,7 +20,8 @@ export default class CameraScreen extends Component {
     hasCameraPermission: null,
     type: Camera.Constants.Type.back,
     pickedType: false,
-    currentType: null
+    currentType: null,
+    currentShop: []
   };
 
   async componentDidMount() {
@@ -48,7 +49,15 @@ export default class CameraScreen extends Component {
       await this.camera.takePictureAsync(options).then(async photo => {
         photo.exif.Orientation = 1;
         // Photo uri is the location of the photo.
-        getCountryFromPhoto(photo);
+        getCountryFromPhoto(photo)
+          .then(country => {
+           if(country.msg === "No country identified"){
+             alert("Country not found, please try again or type manually")
+           }else 
+            this.setState(country => {
+              this.state.currentShop = [country, ...this.state.currentShop]
+            })
+          })
         // This is where we pass `photo` into the API
       });
     }
@@ -107,51 +116,51 @@ export default class CameraScreen extends Component {
               </View>
             </View>
           ) : (
-            <View>
-              <View
-                style={{
-                  flex: 1,
-                  resizeMode: "cover"
-                }}
-              >
-                <Image
-                  source={require("../../assets/bg.jpeg")}
-                  style={{ opacity: 0.5 }}
+              <View>
+                <View
+                  style={{
+                    flex: 1,
+                    resizeMode: "cover"
+                  }}
+                >
+                  <Image
+                    source={require("../../assets/bg.jpeg")}
+                    style={{ opacity: 0.5 }}
+                  />
+                </View>
+                <Hero
+                  message="What type of food are you scanning?"
+                  icon="camera"
+                />
+
+                <RNPickerSelect
+                  style={pickerStyles}
+                  onDonePress={done => {
+                    this.setState({
+                      pickedType: this.state.currentType
+                    });
+                  }}
+                  onValueChange={value =>
+                    this.setState({
+                      currentType: value
+                    })
+                  }
+                  items={[
+                    { label: "Dairy", value: "dairy" },
+                    { label: "Fruit", value: "fruit" },
+                    { label: "Vegetables", value: "veg" },
+                    { label: "Juice", value: "juice" },
+                    { label: "Meat", value: "meat" },
+                    { label: "Fish", value: "fish" },
+                    { label: "Tinned Goods", value: "tins" },
+                    { label: "Frozen", value: "frozen" },
+                    { label: "Chilled Meals", value: "chilled" },
+                    { label: "Snacks", value: "snacks" },
+                    { label: "Dried Food", value: "dried" }
+                  ]}
                 />
               </View>
-              <Hero
-                message="What type of food are you scanning?"
-                icon="camera"
-              />
-
-              <RNPickerSelect
-                style={pickerStyles}
-                onDonePress={done => {
-                  this.setState({
-                    pickedType: this.state.currentType
-                  });
-                }}
-                onValueChange={value =>
-                  this.setState({
-                    currentType: value
-                  })
-                }
-                items={[
-                  { label: "Dairy", value: "dairy" },
-                  { label: "Fruit", value: "fruit" },
-                  { label: "Vegetables", value: "veg" },
-                  { label: "Juice", value: "juice" },
-                  { label: "Meat", value: "meat" },
-                  { label: "Fish", value: "fish" },
-                  { label: "Tinned Goods", value: "tins" },
-                  { label: "Frozen", value: "frozen" },
-                  { label: "Chilled Meals", value: "chilled" },
-                  { label: "Snacks", value: "snacks" },
-                  { label: "Dried Food", value: "dried" }
-                ]}
-              />
-            </View>
-          )}
+            )}
         </View>
       );
     }
