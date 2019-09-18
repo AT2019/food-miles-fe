@@ -34,6 +34,7 @@ const MainNavigator = createStackNavigator({
   },
   NotWorking: {
     screen: NotWorkingScreen
+
   }
 });
 
