@@ -5,15 +5,15 @@ import {
   View,
   TouchableOpacity,
   AsyncStorage,
-  FlatList,
-  Image
-} from "react-native";
 
-import Hero from "../components/Hero.js";
-import font from "../styles/font";
-import styles from "../styles/main";
-import SignOut from "../components/SignOut.js";
-import { getPrevShoppingLists } from "../../utils/api";
+  FlatList
+} from 'react-native';
+import Hero from '../components/Hero.js';
+import font from '../styles/font';
+import styles from '../styles/main';
+import SignOut from '../components/SignOut.js';
+import { getPrevShoppingLists } from '../../utils/api';
+
 
 export default class PreviousShopsScreen extends Component {
   state = {
@@ -31,8 +31,16 @@ export default class PreviousShopsScreen extends Component {
   render() {
     const { navigate } = this.props.navigation;
     const { prevShoppingLists, isLoading, error } = this.state;
+
     return (
       <>
+
+        <View style={{ flex: 0 }}>
+          <Hero message='Your previous shops!' icon='shopping-basket' />
+          <SignOut navigation={this.props.navigation} />
+
+          {/* <TouchableOpacity
+
         <View>
           <Hero message="Your previous shops!" icon="shopping-basket" />
           <View
@@ -47,32 +55,54 @@ export default class PreviousShopsScreen extends Component {
             />
           </View>
           <TouchableOpacity
+
             style={styles.banner}
             onPress={() => navigate("MoreInfo")}
           >
             <Text style={[font.white, font.center]}>View the map</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
         <FlatList
-          onPress={() => navigate("MoreInfo")}
+
+          style={{ height: 1 }}
+
           data={prevShoppingLists}
           renderItem={({ item }) => (
             <View style={styles.banner}>
-              <Text style={prevShopStyles.bannerInnerHeader}>
-                {new Date(item.date).toDateString()}
-              </Text>
-              <Text style={prevShopStyles.bannerInner}>
-                Mile Total: {item.total_distance} miles
-              </Text>
-              <Text style={prevShopStyles.bannerInner}>
-                Total Items: {item.total_items}
-              </Text>
-              <Text style={prevShopStyles.bannerInner}>
-                Average Distance: {this.calcAverage(item)} miles
-              </Text>
-              <Text style={prevShopStyles.bannerInner}>
-                Shopping List: {this.formatString(item.items)}
-              </Text>
+              <TouchableOpacity
+                style={styles.banner}
+                onPress={() =>
+                  navigate('MoreInfo', {
+                    items: item.items
+                  })
+                }
+              >
+                {item === this.calcLowestDist(prevShoppingLists) && (
+                  <Text style={prevShopStyles.bannerBestShop}>
+                    Congratulations! This is your Best Shop!
+                  </Text>
+                )}
+                <Text style={prevShopStyles.bannerInnerHeader}>
+                  {new Date(item.date).toDateString()}
+                </Text>
+                <Text style={prevShopStyles.bannerInner}>
+                  Mile Total: {item.total_distance} miles
+                </Text>
+                <Text style={prevShopStyles.bannerInner}>
+                  Total Items: {item.total_items}
+                </Text>
+                <Text style={prevShopStyles.bannerInner}>
+                  Average Distance: {this.calcAverage(item)} miles
+                </Text>
+                <Text style={prevShopStyles.bannerInner}>
+                  Shopping List: {this.formatString(item.items)}
+                </Text>
+                {item === this.calcLowestDist(prevShoppingLists) && (
+                  <Text style={prevShopStyles.bannerBestShop}>
+                    Congratulations! This is your Best Shop!
+                  </Text>
+                )}
+              </TouchableOpacity>
             </View>
           )}
           keyExtractor={item => item._id}
@@ -80,9 +110,19 @@ export default class PreviousShopsScreen extends Component {
       </>
     );
   }
+
+  calcLowestDist = prevShoppingLists => {
+    return prevShoppingLists.reduce((acc, loc) =>
+      acc.total_distance / acc.total_items <
+      loc.total_distance / acc.total_items
+        ? acc
+        : loc
+    );
+  };
+
   formatString = items => {
     const foodCatArray = items.map(
-      item => item.food_category[0].toUpperCase() + item.food_category.slice(1)
+      item => item.food_category + ' - ' + item.country
     );
     return foodCatArray.join(", ");
   };
@@ -101,7 +141,6 @@ export default class PreviousShopsScreen extends Component {
     getPrevShoppingLists(email).then(prevShoppingLists => {
       this.setState({
         prevShoppingLists,
-        isLoading: false,
         error: null
       });
     });
@@ -112,6 +151,14 @@ const prevShopStyles = StyleSheet.create({
   bannerInner: {
     paddingLeft: 10,
     color: "#FFFFFF"
+  },
+  bannerBestShop: {
+    margin: 5,
+    textAlign: 'center',
+    color: '#FFD700',
+    textShadowColor: 'rgba(0,0,0, 0.75)',
+    textShadowOffset: { width: -1, height: 1 },
+    textShadowRadius: 10
   },
   bannerInnerHeader: {
     paddingLeft: 10,
