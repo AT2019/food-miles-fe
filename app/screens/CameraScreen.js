@@ -5,6 +5,7 @@ import { Camera } from "expo-camera";
 import Hero from "../components/Hero";
 import font from "../styles/font";
 import RNPickerSelect from "react-native-picker-select";
+import { getCountryFromPhoto } from "../../utils/api";
 import SignOut from "../components/SignOut";
 
 export default class CameraScreen extends Component {
@@ -17,6 +18,7 @@ export default class CameraScreen extends Component {
 
   async componentDidMount() {
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
+    const { status2 } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
     this.setState({
       hasCameraPermission: status === "granted"
     });
@@ -36,11 +38,10 @@ export default class CameraScreen extends Component {
         exif: true
       };
 
-      await this.camera.takePictureAsync(options).then(photo => {
+      await this.camera.takePictureAsync(options).then(async photo => {
         photo.exif.Orientation = 1;
         // Photo uri is the location of the photo.
-        console.log(photo.base64);
-
+        getCountryFromPhoto(photo);
         // This is where we pass `photo` into the API
       });
     }
