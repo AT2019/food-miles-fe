@@ -36,6 +36,15 @@ export default class CameraScreen extends Component {
     title: ""
   };
 
+  componentDidUpdate(prevProps, prevState) {
+    const country = this.props.navigation.getParam("country")
+    if (prevProps !== this.props) {
+      this.setState(() => {
+       return  this.state.currentShop = [country, ...this.state.currentShop]
+      })
+    }
+  }
+
   async snapPhoto() {
     if (this.camera) {
       alert("Taking a photo!");
@@ -64,8 +73,14 @@ export default class CameraScreen extends Component {
   }
 
   render() {
+    console.log(this.state.currentShop, "render")
     const { navigate } = this.props.navigation;
     const { hasCameraPermission, type, pickedType } = this.state;
+    // const country = this.props.navigation.getParam("country")
+    // if (country) {
+    //   this.setState({ urrentShop: country, ...this.state.currentShop })
+    // }
+    // console.log(this.state.currentShop)
     if (hasCameraPermission === null) {
       return <Text>No permissions for camera!</Text>;
     } else if (hasCameraPermission === false) {
