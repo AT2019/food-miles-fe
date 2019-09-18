@@ -26,3 +26,9 @@ export const createUser = (name, email, password) => {
     .then(({ body }) => body.savedUser)
     .catch(err => err);
 };
+
+export const getPrevShoppingLists = email => {
+  return api
+    .get('/prevShopping', { params: { email } })
+    .then(({ body }) => body.shoppings);
+};

@@ -1,13 +1,27 @@
-import React, { Component } from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import Hero from "../components/Hero.js";
-import font from "../styles/font";
-import styles from "../styles/main";
-import SignOut from "../components/SignOut.js";
+import React, { Component } from 'react';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  AsyncStorage,
+  FlatList
+} from 'react-native';
+import { ListItem } from 'react-native-elements';
+import Hero from '../components/Hero.js';
+import font from '../styles/font';
+import styles from '../styles/main';
+import SignOut from '../components/SignOut.js';
+import { getPrevShoppingLists } from '../../utils/api';
 
 export default class PreviousShopsScreen extends Component {
+  state = {
+    prevShoppingLists: null,
+    isLoading: true,
+    error: null
+  };
   static navigationOptions = {
-    title: "Your Previous Shops"
+    title: 'Your Previous Shops'
   };
 
   // We need to use a list view - I haven't done this only because you need to specify data
@@ -15,107 +29,117 @@ export default class PreviousShopsScreen extends Component {
 
   render() {
     const { navigate } = this.props.navigation;
+    const { prevShoppingLists, isLoading, error } = this.state;
     return (
-      <View style={{ flex: 1 }}>
-        <Hero message="Your previous shops!" icon="shopping-basket" />
-        <SignOut navigation={this.props.navigation} />
+      <>
+        <View style={{ flex: 1 }}>
+          <Hero message='Your previous shops!' icon='shopping-basket' />
+          <SignOut navigation={this.props.navigation} />
 
-        <TouchableOpacity
-          style={styles.banner}
-          onPress={() => navigate("MoreInfo")}
-        >
-          <Text style={[font.white, font.center]}>View the map</Text>
-        </TouchableOpacity>
-
-        <View style={styles.banner}>
-          <Text style={prevShopStyles.bannerInnerHeader}>
-            30th September 2019
-          </Text>
-          <Text style={prevShopStyles.bannerInner}>Mile total: 740 miles</Text>
-          <Text style={prevShopStyles.bannerInner}>Total items: 7</Text>
+          <TouchableOpacity
+            style={styles.banner}
+            onPress={() => navigate('MoreInfo')}
+          >
+            <Text style={[font.white, font.center]}>View the map</Text>
+          </TouchableOpacity>
         </View>
-        <View style={styles.banner}>
-          <Text style={prevShopStyles.bannerInnerHeader}>2nd October 2020</Text>
-          <Text style={prevShopStyles.bannerInner}>
-            Mile total: 999,999 miles
-          </Text>
-          <Text style={prevShopStyles.bannerInner}>Total items: 756</Text>
-        </View>
-        <View style={styles.banner}>
-          <Text style={prevShopStyles.bannerInnerHeader}>
-            1st December 3009
-          </Text>
-          <Text style={prevShopStyles.bannerInner}>Mile total: 20 miles</Text>
-          <Text style={prevShopStyles.bannerInner}>Total items: 1</Text>
-        </View>
-        <View style={styles.banner}>
-          <Text style={prevShopStyles.bannerInnerHeader}>
-            1st December 3009
-          </Text>
-          <Text style={prevShopStyles.bannerInner}>Mile total: 20 miles</Text>
-          <Text style={prevShopStyles.bannerInner}>Total items: 1</Text>
-        </View>
-        <View style={styles.banner}>
-          <Text style={prevShopStyles.bannerInnerHeader}>
-            1st December 3009
-          </Text>
-          <Text style={prevShopStyles.bannerInner}>Mile total: 20 miles</Text>
-          <Text style={prevShopStyles.bannerInner}>Total items: 1</Text>
-        </View>
-        <View style={styles.banner}>
-          <Text style={prevShopStyles.bannerInnerHeader}>
-            1st December 3009
-          </Text>
-          <Text style={prevShopStyles.bannerInner}>Mile total: 20 miles</Text>
-          <Text style={prevShopStyles.bannerInner}>Total items: 1</Text>
-        </View>
-      </View>
+        <FlatList
+          onPress={() => navigate('MoreInfo')}
+          data={prevShoppingLists}
+          renderItem={({ item }) => (
+            <View style={styles.banner}>
+              <Text style={prevShopStyles.bannerInnerHeader}>
+                {new Date(item.date).toDateString()}
+              </Text>
+              <Text style={prevShopStyles.bannerInner}>
+                Mile Total: {item.total_distance} miles
+              </Text>
+              <Text style={prevShopStyles.bannerInner}>
+                Total Items: {item.total_items}
+              </Text>
+              <Text style={prevShopStyles.bannerInner}>
+                Average Distance: {this.calcAverage(item)} miles
+              </Text>
+              <Text style={prevShopStyles.bannerInner}>
+                Shopping List: {this.formatString(item.items)}
+              </Text>
+            </View>
+          )}
+          keyExtractor={item => item._id}
+        />
+      </>
     );
   }
+  formatString = items => {
+    const foodCatArray = items.map(
+      item => item.food_category[0].toUpperCase() + item.food_category.slice(1)
+    );
+    return foodCatArray.join(', ');
+  };
+
+  calcAverage = item => {
+    let average = item.total_distance / item.total_items;
+    return average;
+  };
+
+  componentDidMount() {
+    this.fetchPrevShoppingLists();
+  }
+
+  fetchPrevShoppingLists = async () => {
+    let email = await AsyncStorage.getItem('email');
+    getPrevShoppingLists(email).then(prevShoppingLists => {
+      this.setState({
+        prevShoppingLists,
+        isLoading: false,
+        error: null
+      });
+    });
+  };
 }
 
 const prevShopStyles = StyleSheet.create({
   bannerInner: {
     paddingLeft: 10,
-    color: "#FFFFFF"
+    color: '#FFFFFF'
   },
   bannerInnerHeader: {
     paddingLeft: 10,
-    color: "#FFFFFF",
+    color: '#FFFFFF',
     fontSize: 15,
-    textAlign: "center",
+    textAlign: 'center',
     paddingBottom: 6
   },
   cameraContainer: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center"
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   camera: {
     width: 250,
     height: 250
   },
   snapButton: {
-    backgroundColor: "#388E3C",
+    backgroundColor: '#388E3C',
     padding: 10,
-    alignItems: "center",
+    alignItems: 'center',
     borderRadius: 4,
     marginBottom: 10,
     width: 250,
     marginTop: 10,
-    alignItems: "center"
+    alignItems: 'center'
   },
   infoButton: {
-    backgroundColor: "#4CAF50",
+    backgroundColor: '#4CAF50',
     padding: 10,
-    alignItems: "center",
+    alignItems: 'center',
     borderRadius: 4,
     marginBottom: 10,
     width: 250,
     marginTop: 10
   },
   white: {
-    color: "#FFFFFF",
-    textAlign: "center"
+    color: '#FFFFFF',
+    textAlign: 'center'
   }
 });

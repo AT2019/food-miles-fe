@@ -53,13 +53,8 @@ export default class LoginScreen extends Component {
     const { email, password } = this.state;
     loginUser(email, password).then(token => {
       if (!token.msg) {
-        storeData = async () => {
-          try {
-            await AsyncStorage.setItem(`key:JWT', 'value:${token}`);
-          } catch (error) {
-            console.log(error);
-          }
-        };
+        AsyncStorage.setItem('email', email);
+        AsyncStorage.setItem('jwt', token);
         this.props.navigation.navigate('Dashboard');
       } else {
         Alert.alert('Error', 'Incorrect Email or Password', [{ text: 'OK' }]);
