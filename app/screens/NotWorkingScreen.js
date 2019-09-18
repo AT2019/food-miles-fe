@@ -5,7 +5,7 @@ import { Input } from "react-native-elements";
 import styles from "../styles/main";
 import font from "../styles/font";
 import SignOut from "../components/SignOut.js";
-import api from "../../utils/api";
+import { getCountryWithTypedInput } from "../../utils/api";
 
 export default class Dashboard extends Component {
   state = {
@@ -22,16 +22,21 @@ export default class Dashboard extends Component {
     const country = this.state.inputCountry;
     console.log(country);
 
-    return api
-      .get(`/countries/${country}`)
-      .then(body => {
-        console.log(body.body.country);
-        console.log("Inside of API then block");
-        this.setState({
-          countryInfo: body.body.country
-        });
-      })
-      .catch(err => console.log(err));
+    getCountryWithTypedInput(country)
+    .then(country => {
+      console.log("retunred", country)
+    })
+
+    // return api
+    //   .get(`/countries/${country}`)
+    //   .then(body => {
+    //     console.log(body.body.country);
+    //     console.log("Inside of API then block");
+    //     this.setState({
+    //       countryInfo: body.body.country
+    //     });
+    //   })
+    //   .catch(err => console.log(err));
 
     // return api.getCountry(country).then(countryInfo => {
     // });

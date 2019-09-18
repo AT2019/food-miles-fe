@@ -11,6 +11,14 @@ const api = new Frisbee({
   }
 });
 
+export const getCountryWithTypedInput = country => {
+  console.log('in get country api')
+  return api
+    .get(`/countries/${country}`)
+    .then(({ body }) => body.country)
+
+}
+
 export const loginUser = (email, password) => {
   return api
     .post('/user/login', {

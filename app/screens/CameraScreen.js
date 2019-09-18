@@ -51,12 +51,12 @@ export default class CameraScreen extends Component {
         // Photo uri is the location of the photo.
         getCountryFromPhoto(photo)
           .then(country => {
-           if(country.msg === "No country identified"){
-             alert("Country not found, please try again or type manually")
-           }else 
-            this.setState(country => {
-              this.state.currentShop = [country, ...this.state.currentShop]
-            })
+            if (country.msg === "No country identified") {
+              alert("Country not found, please try again or type manually")
+            } else
+              this.setState(country => {
+                this.state.currentShop = [country, ...this.state.currentShop]
+              })
           })
         // This is where we pass `photo` into the API
       });
