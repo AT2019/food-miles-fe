@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text, View, TouchableOpacity } from "react-native";
+import { Text, View, TouchableOpacity, Image } from "react-native";
 import Hero from "../components/Hero.js";
 
 import styles from "../styles/main";
@@ -14,6 +14,17 @@ export default class HomeScreen extends Component {
     const { navigate } = this.props.navigation;
     return (
       <View>
+        <View
+          style={{
+            flex: 1,
+            resizeMode: "cover"
+          }}
+        >
+          <Image
+            source={require("../../assets/bg.jpeg")}
+            style={{ opacity: 0.5 }}
+          />
+        </View>
         <Hero message="Welcome to FoodMiles!" />
 
         <View style={styles.buttonList}>

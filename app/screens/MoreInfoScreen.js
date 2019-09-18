@@ -1,19 +1,20 @@
-import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import MapView, { Marker, Polyline } from 'react-native-maps';
-import Hero from '../components/Hero.js';
+import React, { Component } from "react";
+import { StyleSheet, Text, View, Image } from "react-native";
+import MapView, { Marker, Polyline } from "react-native-maps";
+import Hero from "../components/Hero.js";
 
-import styles from '../styles/main';
-import font from '../styles/font';
-import SignOut from '../components/SignOut.js';
+import styles from "../styles/main";
+import font from "../styles/font";
+import SignOut from "../components/SignOut.js";
 
 export default class CameraScreen extends Component {
   state = {
+
     countries: null
   };
 
   static navigationOptions = {
-    title: 'More information!'
+    title: ""
   };
 
   render() {
@@ -24,7 +25,19 @@ export default class CameraScreen extends Component {
         <View
         // style={styles.mainContainer}
         >
-          <Hero message='Add more information to your shop' icon='plus' />
+          <Hero message="Add more information to your shop" icon="plus" />
+
+          <View
+            style={{
+              flex: 1,
+              resizeMode: "cover"
+            }}
+          >
+            <Image
+              source={require("../../assets/bg.jpeg")}
+              style={{ opacity: 0.5 }}
+            />
+          </View>
           <SignOut navigation={this.props.navigation} />
           {/* <View style={infoStyles.banner}></View> */}
         </View>
@@ -38,6 +51,7 @@ export default class CameraScreen extends Component {
           }}
           showsUserLocation={true}
         >
+
           {items.map(country => {
             return (
               <View key={country._id}>
@@ -72,7 +86,7 @@ export default class CameraScreen extends Component {
               latitude: 51.5074,
               longitude: 0.1278
             }}
-            title={'London'}
+            title={"London"}
           />
         </MapView>
         <Text style={[font.white, font.center]}>The map will go here</Text>
@@ -104,6 +118,6 @@ const mapStyles = StyleSheet.create({
     marginBottom: 80,
     marginLeft: 30,
     marginRight: 30,
-    alignSelf: 'center'
+    alignSelf: "center"
   }
 });
