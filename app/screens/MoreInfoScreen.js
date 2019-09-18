@@ -5,6 +5,7 @@ import Hero from "../components/Hero.js";
 
 import styles from "../styles/main";
 import font from "../styles/font";
+import SignOut from "../components/SignOut.js";
 
 export default class CameraScreen extends Component {
   state = {
@@ -31,6 +32,37 @@ export default class CameraScreen extends Component {
     //     //   Longtitude: -3.17909
     //     // }
     // ]
+
+    countries: [
+      {
+        _id: "Scotland",
+        capital: "Edinburgh",
+        Distance: 534,
+        Latitude: 55.953251,
+        Longtitude: -3.70379
+      },
+      {
+        _id: "Spain",
+        capital: "Madrid",
+        Distance: 1265,
+        Latitude: 40.416775,
+        Longtitude: -3.70379
+      },
+      {
+        _id: "Wales",
+        capital: "Cardiff",
+        Distance: 212,
+        Latitude: 51.481583,
+        Longtitude: -3.17909
+      },
+      {
+        _id: "Italy",
+        capital: "Rome",
+        Distance: 1434,
+        Latitude: 41.902782,
+        Longtitude: 12.496365
+      }
+    ]
   };
 
   static navigationOptions = {
@@ -45,6 +77,7 @@ export default class CameraScreen extends Component {
         // style={styles.mainContainer}
         >
           <Hero message="Add more information to your shop" icon="plus" />
+          <SignOut navigation={this.props.navigation} />
           {/* <View style={infoStyles.banner}></View> */}
         </View>
         <MapView

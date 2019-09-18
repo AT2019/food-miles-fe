@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
+import { Text, View, TouchableOpacity, AsyncStorage } from 'react-native';
 import Hero from '../components/Hero.js';
 
 import styles from '../styles/main';
 import font from '../styles/font';
+import SignOut from '../components/SignOut.js';
 
 export default class Dashboard extends Component {
   static navigationOptions = {
@@ -15,7 +16,7 @@ export default class Dashboard extends Component {
     return (
       <View>
         <Hero message='Your Dashboard' icon='user' />
-
+        <SignOut navigation={this.props.navigation} />
         <View style={styles.buttonList}>
           <TouchableOpacity
             title='Take a photo'

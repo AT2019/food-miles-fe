@@ -1,36 +1,58 @@
 import React, { Component } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Button,
-  TouchableOpacity,
-  Picker
-} from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import Hero from "../components/Hero.js";
 import { Input } from "react-native-elements";
-import RNPickerSelect from "react-native-picker-select";
-
 import styles from "../styles/main";
 import font from "../styles/font";
+import SignOut from "../components/SignOut.js";
+import api from "../../utils/api";
 
 export default class Dashboard extends Component {
+  state = {
+    inputCountry: null,
+    countryInfo: undefined
+  };
+
   static navigationOptions = {
     title: "Not Working?"
+  };
+
+  notWorkingCall = () => {
+    console.log("Called notWorkingCall!");
+    const country = this.state.inputCountry;
+    console.log(country);
+
+    return api
+      .get(`/countries/${country}`)
+      .then(body => {
+        console.log(body.body.country);
+        console.log("Inside of API then block");
+        this.setState({
+          countryInfo: body.body.country
+        });
+      })
+      .catch(err => console.log(err));
+
+    // return api.getCountry(country).then(countryInfo => {
+    // });
   };
 
   render() {
     return (
       <View style={styles.mainContainer}>
         <Hero message="Fill in Information" icon="user" />
+        <SignOut navigation={this.props.navigation} />
 
         <View style={styles.container}>
-          <Input placeholder="What country is the food from?" />
-          <View style={notWorkingStyle.banner}>
-            <Text style={[font.white, font.center]}>Something here</Text>
-          </View>
+          <Input
+            placeholder="What country is the food from?"
+            onChangeText={inputCountry => this.setState({ inputCountry })}
+          />
 
-          <TouchableOpacity style={notWorkingStyle.button}>
+          <TouchableOpacity
+            style={notWorkingStyle.button}
+            onPress={() => this.notWorkingCall()}
+          >
             <Text style={[font.white, font.center]}>Submit Information</Text>
           </TouchableOpacity>
         </View>

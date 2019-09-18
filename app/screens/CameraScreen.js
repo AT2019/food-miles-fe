@@ -5,8 +5,10 @@ import { Camera } from "expo-camera";
 import Hero from "../components/Hero";
 import font from "../styles/font";
 import RNPickerSelect from "react-native-picker-select";
+
 import frisbee from "frisbee";
 import { getCountryFromPhoto } from "../../utils/api";
+import SignOut from "../components/SignOut";
 
 export default class CameraScreen extends Component {
   state = {
@@ -27,6 +29,7 @@ export default class CameraScreen extends Component {
 
   async componentDidMount() {
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
+    const { status2 } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
     this.setState({
       hasCameraPermission: status === "granted"
     });
@@ -59,6 +62,13 @@ export default class CameraScreen extends Component {
         .then(country => {
           this.setState({ countries: country });
         });
+
+      await this.camera.takePictureAsync(options).then(async photo => {
+        photo.exif.Orientation = 1;
+        // Photo uri is the location of the photo.
+        getCountryFromPhoto(photo);
+        // This is where we pass `photo` into the API
+      });
     }
   }
 
@@ -95,8 +105,9 @@ export default class CameraScreen extends Component {
                     countries: this.state.countries
                   })
                 }
+                onPress={() => navigate("PreviousShops")}
               >
-                <Text style={font.white}>More Information</Text>
+                <Text style={font.white}>End Shop</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={camStyles.infoButton}
@@ -138,6 +149,7 @@ export default class CameraScreen extends Component {
                   { label: "Dried Food", value: "dried" }
                 ]}
               />
+              <SignOut navigation={this.props.navigation} />
             </View>
           )}
         </View>
