@@ -2,7 +2,7 @@ const Frisbee = require('frisbee');
 
 // create a new instance of Frisbee
 const api = new Frisbee({
-  baseURI: 'http://ec2-3-15-224-160.us-east-2.compute.amazonaws.com:3003/api',
+  baseURI: 'http://ec2-18-188-223-197.us-east-2.compute.amazonaws.com:3003/api',
   headers: {
     Accept: 'application/json',
     // Accept: "application/x-www-form-urlencoded",
@@ -52,7 +52,7 @@ export const getUsers = () => {
     api
       //if you want to use it locally get the ip address from expo client - should something like 192.168.0.0 or 10.0.0.0 replace 0's as appropriate
       .get(
-        'https://ec2-3-15-224-160.us-east-2.compute.amazonaws.com:3003/api/user'
+        'https://ec2-18-188-223-197.us-east-2.compute.amazonaws.com:3003/api/user'
       )
       .then(data => console.warn(data))
   );
@@ -65,7 +65,7 @@ export const getCountryFromPhoto = photo => {
   };
 
   return fetch(
-    'http://ec2-3-15-224-160.us-east-2.compute.amazonaws.com:3003/api/photo',
+    'http://ec2-18-188-223-197.us-east-2.compute.amazonaws.com:3003/api/photo',
     {
       method: 'post',
       headers: {
