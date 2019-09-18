@@ -39,6 +39,13 @@ export default class HomeScreen extends Component {
           >
             <Text style={font.white}>Dashboard - Temp!</Text>
           </TouchableOpacity>
+          <TouchableOpacity
+            title="DASH  - temp"
+            style={styles.registerButton}
+            onPress={() => navigate("ImageScreen")}
+          >
+            <Text style={font.white}>Dashboard - Temp!</Text>
+          </TouchableOpacity>
         </View>
       </View>
     );

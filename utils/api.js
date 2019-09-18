@@ -1,7 +1,8 @@
 const Frisbee = require("frisbee");
+
 // create a new instance of Frisbee
 const api = new Frisbee({
-  //   baseURI: 'ec2-3-15-224-160.us-east-2.compute.amazonaws.com:3003/api/', // optional
+  //baseURI: "http://ec2-3-15-224-160.us-east-2.compute.amazonaws.com:3003/api",
   headers: {
     Accept: "application/json",
     // Accept: "application/x-www-form-urlencoded",
@@ -9,6 +10,24 @@ const api = new Frisbee({
     // "Content-Type": "application/x-www-form-urlencoded"
   }
 });
+
+export const loginUser = (email, password) => {
+  return api
+    .post("/user/login", {
+      body: { email, password }
+    })
+    .then(({ body }) => body)
+    .catch(err => err);
+};
+
+export const createUser = (name, email, password) => {
+  return api
+    .post("/user/register", {
+      body: { name, email, password }
+    })
+    .then(({ body }) => body.savedUser)
+    .catch(err => err);
+};
 
 export const getUsers = () => {
   return api
@@ -19,7 +38,6 @@ export const getUsers = () => {
 
 
 export const getCountryFromPhoto = photo => {
-  console.log(photo, "<-- in api");
 
   let data = {
     upload_preset: "u7ulrhus",

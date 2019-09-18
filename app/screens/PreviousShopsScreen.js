@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import Hero from "../components/Hero.js";
-
+import font from "../styles/font";
 import styles from "../styles/main";
+import SignOut from "../components/SignOut.js";
 
 export default class PreviousShopsScreen extends Component {
   static navigationOptions = {
@@ -13,9 +14,18 @@ export default class PreviousShopsScreen extends Component {
   // in the ListView
 
   render() {
+    const { navigate } = this.props.navigation;
     return (
       <View style={{ flex: 1 }}>
         <Hero message="Your previous shops!" icon="shopping-basket" />
+        <SignOut navigation={this.props.navigation} />
+
+        <TouchableOpacity
+          style={styles.banner}
+          onPress={() => navigate("MoreInfo")}
+        >
+          <Text style={[font.white, font.center]}>View the map</Text>
+        </TouchableOpacity>
 
         <View style={styles.banner}>
           <Text style={prevShopStyles.bannerInnerHeader}>
@@ -102,8 +112,7 @@ const prevShopStyles = StyleSheet.create({
     borderRadius: 4,
     marginBottom: 10,
     width: 250,
-    marginTop: 10,
-    alignItems: "center"
+    marginTop: 10
   },
   white: {
     color: "#FFFFFF",

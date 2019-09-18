@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Alert } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  Alert,
+  AsyncStorage
+} from 'react-native';
 import Hero from '../components/Hero.js';
 import { Input } from 'react-native-elements';
-
+import { loginUser } from '../../utils/api';
 import styles from '../styles/main';
 import font from '../styles/font';
-import UsersLists from '../components/UsersLists.js';
 
 export default class LoginScreen extends Component {
   state = {
@@ -20,10 +26,10 @@ export default class LoginScreen extends Component {
     return (
       <View style={styles.mainContainer}>
         <Hero message='Login to FoodMiles!' icon='user' />
-        <UsersLists />
         <View style={loginStyles.loginContainer}>
           <Input
             placeholder='Your email'
+            autoCapitalize='none'
             onChangeText={text => this.setState({ email: text })}
           />
           <Input
@@ -34,7 +40,7 @@ export default class LoginScreen extends Component {
           <TouchableOpacity style={loginStyles.loginButton}>
             <Text
               style={[font.white, font.center]}
-              onPress={_ => this.checkLogin()}
+              onPress={() => this.checkLogin()}
             >
               Login
             </Text>
@@ -45,11 +51,20 @@ export default class LoginScreen extends Component {
   }
   checkLogin() {
     const { email, password } = this.state;
-    if (email === 'admin@test.com' && password === 'admin') {
-      this.props.navigation.navigate('Dashboard');
-    } else {
-      Alert.alert('Error', 'Incorrect Email or Password', [{ text: 'OK' }]);
-    }
+    loginUser(email, password).then(token => {
+      if (!token.msg) {
+        storeData = async () => {
+          try {
+            await AsyncStorage.setItem(`key:JWT', 'value:${token}`);
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        this.props.navigation.navigate('Dashboard');
+      } else {
+        Alert.alert('Error', 'Incorrect Email or Password', [{ text: 'OK' }]);
+      }
+    });
   }
 }
 

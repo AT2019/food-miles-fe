@@ -6,6 +6,7 @@ import Hero from "../components/Hero";
 import font from "../styles/font";
 import RNPickerSelect from "react-native-picker-select";
 import { getCountryFromPhoto } from "../../utils/api";
+import SignOut from "../components/SignOut";
 
 export default class CameraScreen extends Component {
   state = {
@@ -40,24 +41,9 @@ export default class CameraScreen extends Component {
       await this.camera.takePictureAsync(options).then(async photo => {
         photo.exif.Orientation = 1;
         // Photo uri is the location of the photo.
-        // console.log(photo.base64);
-        // const manipPhoto = await ImageManipulator.manipulateAsync(
-        //   photo.uri,
-        //   [],
-        //   {
-        //     compress: 0.05,
-        //     format: ImageManipulator.SaveFormat.PNG,
-        //     base64: true
-        //   }
-        // );
         getCountryFromPhoto(photo);
         // This is where we pass `photo` into the API
       });
-      // const image = await ImagePicker.launchCameraAsync({
-      //   mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      //   quality: 0.1
-      // });
-      // getCountryFromPhoto(image);
     }
   }
 
@@ -89,9 +75,9 @@ export default class CameraScreen extends Component {
               </TouchableOpacity>
               <TouchableOpacity
                 style={camStyles.infoButton}
-                onPress={() => navigate("MoreInfo")}
+                onPress={() => navigate("PreviousShops")}
               >
-                <Text style={font.white}>More Information</Text>
+                <Text style={font.white}>End Shop</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={camStyles.infoButton}
@@ -101,40 +87,41 @@ export default class CameraScreen extends Component {
               </TouchableOpacity>
             </View>
           ) : (
-              <View style={{ flex: 1 }}>
-                <Hero
-                  message="What type of food are you scanning?"
-                  icon="camera"
-                />
+            <View style={{ flex: 1 }}>
+              <Hero
+                message="What type of food are you scanning?"
+                icon="camera"
+              />
 
-                <RNPickerSelect
-                  style={pickerStyles}
-                  onDonePress={done => {
-                    this.setState({
-                      pickedType: this.state.currentType
-                    });
-                  }}
-                  onValueChange={value =>
-                    this.setState({
-                      currentType: value
-                    })
-                  }
-                  items={[
-                    { label: "Dairy", value: "dairy" },
-                    { label: "Fruit", value: "fruit" },
-                    { label: "Vegetables", value: "veg" },
-                    { label: "Juice", value: "juice" },
-                    { label: "Meat", value: "meat" },
-                    { label: "Fish", value: "fish" },
-                    { label: "Tinned Goods", value: "tins" },
-                    { label: "Frozen", value: "frozen" },
-                    { label: "Chilled Meals", value: "chilled" },
-                    { label: "Snacks", value: "snacks" },
-                    { label: "Dried Food", value: "dried" }
-                  ]}
-                />
-              </View>
-            )}
+              <RNPickerSelect
+                style={pickerStyles}
+                onDonePress={done => {
+                  this.setState({
+                    pickedType: this.state.currentType
+                  });
+                }}
+                onValueChange={value =>
+                  this.setState({
+                    currentType: value
+                  })
+                }
+                items={[
+                  { label: "Dairy", value: "dairy" },
+                  { label: "Fruit", value: "fruit" },
+                  { label: "Vegetables", value: "veg" },
+                  { label: "Juice", value: "juice" },
+                  { label: "Meat", value: "meat" },
+                  { label: "Fish", value: "fish" },
+                  { label: "Tinned Goods", value: "tins" },
+                  { label: "Frozen", value: "frozen" },
+                  { label: "Chilled Meals", value: "chilled" },
+                  { label: "Snacks", value: "snacks" },
+                  { label: "Dried Food", value: "dried" }
+                ]}
+              />
+              <SignOut navigation={this.props.navigation} />
+            </View>
+          )}
         </View>
       );
     }
