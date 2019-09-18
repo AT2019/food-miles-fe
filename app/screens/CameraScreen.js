@@ -40,7 +40,7 @@ export default class CameraScreen extends Component {
     const country = this.props.navigation.getParam("country")
     if (prevProps !== this.props) {
       this.setState(() => {
-       return  this.state.currentShop = [country, ...this.state.currentShop]
+        return this.state.currentShop = [country, ...this.state.currentShop]
       })
     }
   }
@@ -150,14 +150,15 @@ export default class CameraScreen extends Component {
 
                 <RNPickerSelect
                   style={pickerStyles}
-                  onDonePress={done => {
+                  onDonePress={done => { //this is only needed on ios
                     this.setState({
                       pickedType: this.state.currentType
                     });
                   }}
                   onValueChange={value =>
                     this.setState({
-                      currentType: value
+                      currentType: value,
+                      pickedType: value // this fixes it for android but breaks on ios
                     })
                   }
                   items={[
