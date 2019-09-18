@@ -5,15 +5,14 @@ import {
   View,
   TouchableOpacity,
   AsyncStorage,
-
-  FlatList
-} from 'react-native';
-import Hero from '../components/Hero.js';
-import font from '../styles/font';
-import styles from '../styles/main';
-import SignOut from '../components/SignOut.js';
-import { getPrevShoppingLists } from '../../utils/api';
-
+  FlatList,
+  Image
+} from "react-native";
+import Hero from "../components/Hero.js";
+import font from "../styles/font";
+import styles from "../styles/main";
+import SignOut from "../components/SignOut.js";
+import { getPrevShoppingLists } from "../../utils/api";
 
 export default class PreviousShopsScreen extends Component {
   state = {
@@ -34,9 +33,20 @@ export default class PreviousShopsScreen extends Component {
 
     return (
       <>
-
         <View style={{ flex: 0 }}>
-          <Hero message='Your previous shops!' icon='shopping-basket' />
+          <View
+            style={{
+              flex: 1,
+              resizeMode: "cover"
+            }}
+          >
+            <Image
+              source={require("../../assets/bg.jpeg")}
+              style={{ opacity: 0.5 }}
+            />
+          </View>
+
+          <Hero message="Your previous shops!" icon="shopping-basket" />
           <SignOut navigation={this.props.navigation} />
 
           {/* <TouchableOpacity
@@ -63,16 +73,14 @@ export default class PreviousShopsScreen extends Component {
           </TouchableOpacity> */}
         </View>
         <FlatList
-
           style={{ height: 1 }}
-
           data={prevShoppingLists}
           renderItem={({ item }) => (
             <View style={styles.banner}>
               <TouchableOpacity
                 style={styles.banner}
                 onPress={() =>
-                  navigate('MoreInfo', {
+                  navigate("MoreInfo", {
                     items: item.items
                   })
                 }
@@ -122,7 +130,7 @@ export default class PreviousShopsScreen extends Component {
 
   formatString = items => {
     const foodCatArray = items.map(
-      item => item.food_category + ' - ' + item.country
+      item => item.food_category + " - " + item.country
     );
     return foodCatArray.join(", ");
   };
@@ -154,9 +162,9 @@ const prevShopStyles = StyleSheet.create({
   },
   bannerBestShop: {
     margin: 5,
-    textAlign: 'center',
-    color: '#FFD700',
-    textShadowColor: 'rgba(0,0,0, 0.75)',
+    textAlign: "center",
+    color: "#FFD700",
+    textShadowColor: "rgba(0,0,0, 0.75)",
     textShadowOffset: { width: -1, height: 1 },
     textShadowRadius: 10
   },
