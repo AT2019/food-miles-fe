@@ -35,6 +35,10 @@ export const getPrevShoppingLists = email => {
     .then(({ body }) => body.shoppings);
 };
 
+export const getUserByEmail = email => {
+  return api.get(`/user/${email}`).then(({ body }) => body.user);
+};
+
 export const getUsers = () => {
   return (
     api
