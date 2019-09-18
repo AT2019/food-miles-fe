@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
 import Hero from "../components/Hero.js";
 import { Input } from "react-native-elements";
 import styles from "../styles/main";
@@ -39,11 +39,22 @@ export default class Dashboard extends Component {
 
   render() {
     return (
-      <View style={styles.mainContainer}>
+      <View>
         <Hero message="Fill in Information" icon="user" />
+        <View
+          style={{
+            flex: 1,
+            resizeMode: "cover"
+          }}
+        >
+          <Image
+            source={require("../../assets/bg.jpeg")}
+            style={{ opacity: 0.5 }}
+          />
+        </View>
         <SignOut navigation={this.props.navigation} />
 
-        <View style={styles.container}>
+        <View>
           <Input
             placeholder="What country is the food from?"
             onChangeText={inputCountry => this.setState({ inputCountry })}
@@ -61,6 +72,9 @@ export default class Dashboard extends Component {
   }
 }
 const notWorkingStyle = StyleSheet.create({
+  cont: {
+    flex: 1
+  },
   button: {
     backgroundColor: "#388E3C",
     padding: 10,
