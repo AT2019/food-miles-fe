@@ -56,6 +56,11 @@ export default class PreviousShopsScreen extends Component {
                   })
                 }
               >
+                {item === this.calcLowestDist(prevShoppingLists) && (
+                  <Text style={prevShopStyles.bannerBestShop}>
+                    Congratulations! This is your Best Shop!
+                  </Text>
+                )}
                 <Text style={prevShopStyles.bannerInnerHeader}>
                   {new Date(item.date).toDateString()}
                 </Text>
@@ -115,7 +120,6 @@ export default class PreviousShopsScreen extends Component {
     getPrevShoppingLists(email).then(prevShoppingLists => {
       this.setState({
         prevShoppingLists,
-        isLoading: false,
         error: null
       });
     });
@@ -128,7 +132,8 @@ const prevShopStyles = StyleSheet.create({
     color: '#FFFFFF'
   },
   bannerBestShop: {
-    paddingLeft: 10,
+    margin: 5,
+    textAlign: 'center',
     color: '#FFD700',
     textShadowColor: 'rgba(0,0,0, 0.75)',
     textShadowOffset: { width: -1, height: 1 },
