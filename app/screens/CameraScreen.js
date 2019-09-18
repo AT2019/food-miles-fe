@@ -1,5 +1,12 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, Button, TouchableOpacity } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Button,
+  TouchableOpacity,
+  Image
+} from "react-native";
 import * as Permissions from "expo-permissions";
 import { Camera } from "expo-camera";
 import Hero from "../components/Hero";
@@ -25,7 +32,7 @@ export default class CameraScreen extends Component {
   }
 
   static navigationOptions = {
-    title: "Scan your food!"
+    title: ""
   };
 
   async snapPhoto() {
@@ -56,38 +63,62 @@ export default class CameraScreen extends Component {
       return <Text>No access to camera</Text>;
     } else {
       return (
-        <View style={{ flex: 1 }}>
+        <View>
           {pickedType ? (
-            <View style={camStyles.cameraContainer}>
-              <View style={camStyles.infoButton}>
-                <Text style={font.white}>Food type: {pickedType}</Text>
+            <View>
+              <View
+                style={{
+                  flex: 1,
+                  resizeMode: "cover"
+                }}
+              >
+                <Image
+                  source={require("../../assets/bg.jpeg")}
+                  style={{ opacity: 0.5 }}
+                />
               </View>
-              <Camera
-                type={type}
-                ref={ref => (this.camera = ref)}
-                style={camStyles.camera}
-              ></Camera>
-              <TouchableOpacity
-                style={camStyles.snapButton}
-                onPress={() => this.snapPhoto()}
-              >
-                <Text style={font.white}>Snap Photo!</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={camStyles.infoButton}
-                onPress={() => navigate("PreviousShops")}
-              >
-                <Text style={font.white}>End Shop</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={camStyles.infoButton}
-                onPress={() => navigate("NotWorking")}
-              >
-                <Text style={font.white}>Not working?</Text>
-              </TouchableOpacity>
+              <View style={camStyles.cameraContainer}>
+                <View style={camStyles.infoButton}>
+                  <Text style={font.white}>Food type: {pickedType}</Text>
+                </View>
+                <Camera
+                  type={type}
+                  ref={ref => (this.camera = ref)}
+                  style={camStyles.camera}
+                ></Camera>
+                <TouchableOpacity
+                  style={camStyles.snapButton}
+                  onPress={() => this.snapPhoto()}
+                >
+                  <Text style={font.white}>Snap Photo!</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={camStyles.infoButton}
+                  onPress={() => navigate("PreviousShops")}
+                >
+                  <Text style={font.white}>End Shop</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={camStyles.infoButton}
+                  onPress={() => navigate("NotWorking")}
+                >
+                  <Text style={font.white}>Not working?</Text>
+                </TouchableOpacity>
+              </View>
             </View>
           ) : (
-            <View style={{ flex: 1 }}>
+            <View>
+              <View
+                style={{
+                  flex: 1,
+                  resizeMode: "cover"
+                }}
+              >
+                <Image
+                  source={require("../../assets/bg.jpeg")}
+                  style={{ opacity: 0.5 }}
+                />
+              </View>
               <Hero
                 message="What type of food are you scanning?"
                 icon="camera"
@@ -119,7 +150,6 @@ export default class CameraScreen extends Component {
                   { label: "Dried Food", value: "dried" }
                 ]}
               />
-              <SignOut navigation={this.props.navigation} />
             </View>
           )}
         </View>
@@ -130,7 +160,6 @@ export default class CameraScreen extends Component {
 
 const camStyles = StyleSheet.create({
   cameraContainer: {
-    flex: 1,
     alignItems: "center",
     justifyContent: "center"
   },

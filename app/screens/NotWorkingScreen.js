@@ -14,7 +14,7 @@ export default class Dashboard extends Component {
   };
 
   static navigationOptions = {
-    title: "Not Working?"
+    title: ""
   };
 
   notWorkingCall = () => {

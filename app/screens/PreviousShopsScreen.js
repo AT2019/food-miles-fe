@@ -1,18 +1,19 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   StyleSheet,
   Text,
   View,
   TouchableOpacity,
   AsyncStorage,
-  FlatList
-} from 'react-native';
-import { ListItem } from 'react-native-elements';
-import Hero from '../components/Hero.js';
-import font from '../styles/font';
-import styles from '../styles/main';
-import SignOut from '../components/SignOut.js';
-import { getPrevShoppingLists } from '../../utils/api';
+  FlatList,
+  Image
+} from "react-native";
+
+import Hero from "../components/Hero.js";
+import font from "../styles/font";
+import styles from "../styles/main";
+import SignOut from "../components/SignOut.js";
+import { getPrevShoppingLists } from "../../utils/api";
 
 export default class PreviousShopsScreen extends Component {
   state = {
@@ -21,7 +22,7 @@ export default class PreviousShopsScreen extends Component {
     error: null
   };
   static navigationOptions = {
-    title: 'Your Previous Shops'
+    title: ""
   };
 
   // We need to use a list view - I haven't done this only because you need to specify data
@@ -32,19 +33,28 @@ export default class PreviousShopsScreen extends Component {
     const { prevShoppingLists, isLoading, error } = this.state;
     return (
       <>
-        <View style={{ flex: 1 }}>
-          <Hero message='Your previous shops!' icon='shopping-basket' />
-          <SignOut navigation={this.props.navigation} />
-
+        <View>
+          <Hero message="Your previous shops!" icon="shopping-basket" />
+          <View
+            style={{
+              flex: 1,
+              resizeMode: "cover"
+            }}
+          >
+            <Image
+              source={require("../../assets/bg.jpeg")}
+              style={{ opacity: 0.5 }}
+            />
+          </View>
           <TouchableOpacity
             style={styles.banner}
-            onPress={() => navigate('MoreInfo')}
+            onPress={() => navigate("MoreInfo")}
           >
             <Text style={[font.white, font.center]}>View the map</Text>
           </TouchableOpacity>
         </View>
         <FlatList
-          onPress={() => navigate('MoreInfo')}
+          onPress={() => navigate("MoreInfo")}
           data={prevShoppingLists}
           renderItem={({ item }) => (
             <View style={styles.banner}>
@@ -74,7 +84,7 @@ export default class PreviousShopsScreen extends Component {
     const foodCatArray = items.map(
       item => item.food_category[0].toUpperCase() + item.food_category.slice(1)
     );
-    return foodCatArray.join(', ');
+    return foodCatArray.join(", ");
   };
 
   calcAverage = item => {
@@ -87,7 +97,7 @@ export default class PreviousShopsScreen extends Component {
   }
 
   fetchPrevShoppingLists = async () => {
-    let email = await AsyncStorage.getItem('email');
+    let email = await AsyncStorage.getItem("email");
     getPrevShoppingLists(email).then(prevShoppingLists => {
       this.setState({
         prevShoppingLists,
@@ -101,45 +111,45 @@ export default class PreviousShopsScreen extends Component {
 const prevShopStyles = StyleSheet.create({
   bannerInner: {
     paddingLeft: 10,
-    color: '#FFFFFF'
+    color: "#FFFFFF"
   },
   bannerInnerHeader: {
     paddingLeft: 10,
-    color: '#FFFFFF',
+    color: "#FFFFFF",
     fontSize: 15,
-    textAlign: 'center',
+    textAlign: "center",
     paddingBottom: 6
   },
   cameraContainer: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
+    alignItems: "center",
+    justifyContent: "center"
   },
   camera: {
     width: 250,
     height: 250
   },
   snapButton: {
-    backgroundColor: '#388E3C',
+    backgroundColor: "#388E3C",
     padding: 10,
-    alignItems: 'center',
+    alignItems: "center",
     borderRadius: 4,
     marginBottom: 10,
     width: 250,
     marginTop: 10,
-    alignItems: 'center'
+    alignItems: "center"
   },
   infoButton: {
-    backgroundColor: '#4CAF50',
+    backgroundColor: "#4CAF50",
     padding: 10,
-    alignItems: 'center',
+    alignItems: "center",
     borderRadius: 4,
     marginBottom: 10,
     width: 250,
     marginTop: 10
   },
   white: {
-    color: '#FFFFFF',
-    textAlign: 'center'
+    color: "#FFFFFF",
+    textAlign: "center"
   }
 });
