@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import {
   StyleSheet,
   Text,
@@ -7,45 +7,45 @@ import {
   Alert,
   AsyncStorage,
   Image
-} from "react-native";
-import Hero from "../components/Hero.js";
-import { Input } from "react-native-elements";
-import { loginUser } from "../../utils/api";
-import styles from "../styles/main";
-import font from "../styles/font";
+} from 'react-native';
+import Hero from '../components/Hero.js';
+import { Input } from 'react-native-elements';
+import { loginUser, getUserByEmail } from '../../utils/api';
+import styles from '../styles/main';
+import font from '../styles/font';
 
 export default class LoginScreen extends Component {
   state = {
-    email: "",
-    password: ""
+    email: '',
+    password: ''
   };
   static navigationOptions = {
-    title: ""
+    title: ''
   };
 
   render() {
     return (
       <View>
-        <Hero message="Login to FoodMiles!" icon="user" />
+        <Hero message='Login to FoodMiles!' icon='user' />
         <View
           style={{
             flex: 1,
-            resizeMode: "cover"
+            resizeMode: 'cover'
           }}
         >
           <Image
-            source={require("../../assets/bg.jpeg")}
+            source={require('../../assets/bg.jpeg')}
             style={{ opacity: 0.5 }}
           />
         </View>
         <View style={loginStyles.loginContainer}>
           <Input
-            placeholder="Your email"
-            autoCapitalize="none"
+            placeholder='Your email'
+            autoCapitalize='none'
             onChangeText={text => this.setState({ email: text })}
           />
           <Input
-            placeholder="Your password"
+            placeholder='Your password'
             secureTextEntry={true}
             onChangeText={text => this.setState({ password: text })}
           />
@@ -65,11 +65,16 @@ export default class LoginScreen extends Component {
     const { email, password } = this.state;
     loginUser(email, password).then(token => {
       if (!token.msg) {
-        AsyncStorage.setItem("email", email);
-        AsyncStorage.setItem("jwt", token);
-        this.props.navigation.navigate("Dashboard");
+        getUserByEmail(email)
+          .then(user => user.name)
+          .then(name => {
+            AsyncStorage.setItem('email', email);
+            AsyncStorage.setItem('jwt', token);
+            Alert.alert('Welcome!', `Logged in as ${name}`);
+            this.props.navigation.navigate('Dashboard');
+          });
       } else {
-        Alert.alert("Error", "Incorrect Email or Password", [{ text: "OK" }]);
+        Alert.alert('Error', 'Incorrect Email or Password', [{ text: 'OK' }]);
       }
     });
   }
@@ -80,15 +85,15 @@ const loginStyles = StyleSheet.create({
     flex: 1
   },
   loginContainer: {
-    justifyContent: "center",
-    alignItems: "center"
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   loginButton: {
-    backgroundColor: "#388E3C",
+    backgroundColor: '#388E3C',
     padding: 10,
     borderRadius: 4,
     marginBottom: 10,
-    alignSelf: "stretch",
+    alignSelf: 'stretch',
     marginLeft: 10,
     marginRight: 10,
     marginTop: 10
