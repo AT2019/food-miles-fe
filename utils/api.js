@@ -19,6 +19,14 @@ export const getCountryWithTypedInput = country => {
 
 }
 
+export const postNewShoppingList = list => {
+  return api
+    .post('/prevShopping', { body: list })
+    .then(({ body }) => console.log(body))
+    .catch(err => err);
+
+}
+
 export const loginUser = (email, password) => {
   return api
     .post('/user/login', {

@@ -157,6 +157,7 @@ export default class PreviousShopsScreen extends Component {
 
 const prevShopStyles = StyleSheet.create({
   bannerInner: {
+    fontWeight: "bold",
     paddingLeft: 10,
     color: "#FFFFFF"
   },
@@ -169,6 +170,7 @@ const prevShopStyles = StyleSheet.create({
     textShadowRadius: 10
   },
   bannerInnerHeader: {
+    fontWeight: "bold",
     paddingLeft: 10,
     color: "#FFFFFF",
     fontSize: 15,
