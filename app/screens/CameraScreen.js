@@ -5,15 +5,19 @@ import {
   View,
   Button,
   TouchableOpacity,
-  Image
+  Image,
+  FlatList,
+  AsyncStorage,
+  Alert
 } from "react-native";
 import * as Permissions from "expo-permissions";
 import { Camera } from "expo-camera";
 import Hero from "../components/Hero";
 import font from "../styles/font";
+import styles from "../styles/main";
 import RNPickerSelect from "react-native-picker-select";
-import { getCountryFromPhoto } from "../../utils/api";
-import SignOut from "../components/SignOut";
+import { getCountryFromPhoto, postNewShoppingList, getCountryWithTypedInput } from "../../utils/api";
+import { ListItem } from "react-native-elements"
 
 export default class CameraScreen extends Component {
   state = {
@@ -39,15 +43,20 @@ export default class CameraScreen extends Component {
   componentDidUpdate(prevProps, prevState) {
     const country = this.props.navigation.getParam("country")
     if (prevProps !== this.props) {
+      const newData = { food_category: this.state.pickedType, latitude: country.latitude, longitude: country.longitude, distance: country.distance, country: country._id }
       this.setState(() => {
-       return  this.state.currentShop = [country, ...this.state.currentShop]
+        this.state.pickedType = false
+        return this.state.currentShop = [newData, ...this.state.currentShop]
       })
     }
   }
+  // pick new product type
+  // display on camera screen
+  // on endShop make post request to DB and got to previous shop screen to view map
 
   async snapPhoto() {
     if (this.camera) {
-      alert("Taking a photo!");
+      // alert("Taking a photo!");
       const options = {
         quality: 1,
         base64: true,
@@ -69,7 +78,27 @@ export default class CameraScreen extends Component {
           })
         // This is where we pass `photo` into the API
       });
+    } Alert.alert("Country", "Morocco")
+    getCountryWithTypedInput("China")
+      .then(country => {
+        // console.log("navigate")
+        return this.props.navigation.navigate("Camera", { country })
+      })
+  }
+  postShoppingList = async () => {
+    try {
+      const email = await AsyncStorage.getItem("email")
+      const newObj = await { email, items: this.state.currentShop }
+      postNewShoppingList(newObj)
+        .then(() => this.props.navigation.navigate("PreviousShops"))
+
+    } catch (error) {
+      console.log(error)
     }
+
+    // const objToSend = {}
+
+    // this.props.navigation.navigate("PreviousShops")
   }
 
   render() {
@@ -161,18 +190,47 @@ export default class CameraScreen extends Component {
                     })
                   }
                   items={[
-                    { label: "Dairy", value: "dairy" },
-                    { label: "Fruit", value: "fruit" },
-                    { label: "Vegetables", value: "veg" },
-                    { label: "Juice", value: "juice" },
-                    { label: "Meat", value: "meat" },
-                    { label: "Fish", value: "fish" },
-                    { label: "Tinned Goods", value: "tins" },
-                    { label: "Frozen", value: "frozen" },
-                    { label: "Chilled Meals", value: "chilled" },
-                    { label: "Snacks", value: "snacks" },
-                    { label: "Dried Food", value: "dried" }
+                    { label: "Dairy", value: "Dairy" },
+                    { label: "Fruit", value: "Fruit" },
+                    { label: "Vegetable", value: "Vegetable" },
+                    { label: "Juice", value: "Juice" },
+                    { label: "Meat", value: "Meat" },
+                    { label: "Fish", value: "Fish" },
+                    { label: "Tinned Goods", value: "Tinned Goods" },
+                    { label: "Frozen", value: "Frozen" },
+                    { label: "Chilled Meals", value: "Chilled" },
+                    { label: "Snacks", value: "Snacks" },
+                    { label: "Dried Food", value: "Dried Foods" }
                   ]}
+                />
+                <View style={camStyles.cameraContainer}>
+                  <TouchableOpacity
+                    style={camStyles.infoButton}
+                    onPress={() => this.postShoppingList()}
+                  >
+                    <Text style={font.white}>End Shop</Text>
+                  </TouchableOpacity>
+                </View>
+                <FlatList
+                  data={this.state.currentShop}
+                  renderItem={({ item, index }) => (
+                    <View style={styles.banner}>
+                      <Text style={prevShopStyles.bannerInnerHeader}>
+                        Type: {item.food_category}
+                      </Text>
+                      <Text style={prevShopStyles.bannerInner}>
+                        Distance: {item.distance}
+                      </Text>
+                      <Text style={prevShopStyles.bannerInner}>
+                        Country: {item.country}
+                      </Text>
+                    </View>
+                    // <ListItem
+                    //   style={styles.banner}
+                    //   title={item.country}
+                    //   subtitle={item.distance.toString()}
+                    // />
+                  )} keyExtractor={(item, index) => item.country}
                 />
               </View>
             )}
@@ -227,3 +285,26 @@ const pickerStyles = StyleSheet.create({
   },
   inputAndroid: {}
 });
+const prevShopStyles = StyleSheet.create({
+  bannerInner: {
+    fontWeight: "bold",
+    paddingLeft: 10,
+    color: "#FFFFFF"
+  },
+  bannerBestShop: {
+    margin: 5,
+    textAlign: "center",
+    color: "#FFD700",
+    textShadowColor: "rgba(0,0,0, 0.75)",
+    textShadowOffset: { width: -1, height: 1 },
+    textShadowRadius: 10
+  },
+  bannerInnerHeader: {
+    fontWeight: "bold",
+    paddingLeft: 10,
+    color: "#FFFFFF",
+    fontSize: 15,
+    textAlign: "center",
+    paddingBottom: 6
+  }
+})

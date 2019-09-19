@@ -12,10 +12,18 @@ const api = new Frisbee({
 });
 
 export const getCountryWithTypedInput = country => {
-  console.log('in get country api')
+  // console.log('in get country api', country)
   return api
     .get(`/countries/${country}`)
     .then(({ body }) => body.country)
+
+}
+
+export const postNewShoppingList = list => {
+  return api
+    .post('/prevShopping', { body: list })
+    .then(({ body }) => console.log(body))
+    .catch(err => err);
 
 }
 
