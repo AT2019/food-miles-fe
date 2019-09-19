@@ -2,7 +2,7 @@ const Frisbee = require('frisbee');
 
 // create a new instance of Frisbee
 const api = new Frisbee({
-  baseURI: 'http://ec2-3-15-224-160.us-east-2.compute.amazonaws.com:3003/api',
+  baseURI: 'http://ec2-18-188-223-197.us-east-2.compute.amazonaws.com:3003/api',
   headers: {
     Accept: 'application/json',
     // Accept: "application/x-www-form-urlencoded",
@@ -12,7 +12,7 @@ const api = new Frisbee({
 });
 
 export const getCountryWithTypedInput = country => {
-  console.log('in get country api')
+  // console.log('in get country api', country)
   return api
     .get(`/countries/${country}`)
     .then(({ body }) => body.country)

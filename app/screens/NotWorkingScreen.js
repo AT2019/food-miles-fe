@@ -18,13 +18,11 @@ export default class Dashboard extends Component {
   };
 
   notWorkingCall = () => {
-
     const country = this.state.inputCountry;
-
-
     getCountryWithTypedInput(country)
       .then(country => {
-       return this.props.navigation.navigate("Camera", { country })
+        // console.log("navigate")
+        return this.props.navigation.navigate("Camera", { country })
       })
 
 
