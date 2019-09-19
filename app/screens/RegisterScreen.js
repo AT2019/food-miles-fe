@@ -5,7 +5,8 @@ import {
   View,
   TouchableOpacity,
   Alert,
-  Image
+  Image,
+  AsyncStorage
 } from "react-native";
 import Hero from "../components/Hero.js";
 import { Input } from "react-native-elements";
@@ -72,7 +73,8 @@ export default class RegisterScreen extends Component {
     const { username, email, password } = this.state;
     createUser(username, email, password).then(user => {
       if (user) {
-        Alert.alert(`${user} successfully signed up!`);
+        Alert.alert(`${user.name} successfully signed up!`);
+        AsyncStorage.setItem("email", user.email)
         this.props.navigation.navigate("Dashboard");
       } else {
         Alert.alert("Error", "Incorrect Username, Email or Password", [

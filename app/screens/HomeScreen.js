@@ -43,13 +43,13 @@ export default class HomeScreen extends Component {
           >
             <Text style={font.white}>Register for FoodMiles!</Text>
           </TouchableOpacity>
-          <TouchableOpacity
+          {/* <TouchableOpacity
             title="DASH  - temp"
             style={styles.registerButton}
             onPress={() => navigate("Dashboard")}
           >
             <Text style={font.white}>Dashboard - Temp!</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
       </View>
     );
