@@ -78,12 +78,7 @@ export default class CameraScreen extends Component {
           })
         // This is where we pass `photo` into the API
       });
-    } Alert.alert("Country", "Morocco")
-    getCountryWithTypedInput("Morocco")
-      .then(country => {
-        // console.log("navigate")
-        return this.props.navigation.navigate("Camera", { country })
-      })
+    } 
   }
   postShoppingList = async () => {
     try {
